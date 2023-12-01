@@ -20,22 +20,8 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) throws SQLException{
-        DBConnector.connect();
-        QueryExecutor query = new QueryExecutor();
-        try {
-            ResultSet result = query.executeSelect("SELECT * FROM user");
-            while(result.next()) {
-                result.next();
-                String resultOfQuery = result.getString("first_name");
-                System.out.println(resultOfQuery);
-            }
-
-        }
-        catch(SQLException | NullPointerException e){
-            e.printStackTrace();
-        }
+        DataGenerator initial = new DataGenerator();
+        StringBuilder result = initial.generateUsers(50);
         launch();
-
-
     }
 }
