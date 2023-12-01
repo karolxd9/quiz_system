@@ -22,6 +22,7 @@ public class HelloApplication extends Application {
     public static void main(String[] args) throws SQLException{
         DataGenerator initial = new DataGenerator();
         StringBuilder result = initial.generateUsers(50);
+        System.out.println(initial.getMaxIndexUser());
         launch();
     }
 }
