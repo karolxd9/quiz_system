@@ -24,11 +24,14 @@ public class HelloApplication extends Application {
         QueryExecutor query = new QueryExecutor();
         try {
             ResultSet result = query.executeSelect("SELECT * FROM user");
-            result.next();
-            String resultOfQuery = result.getString("first_name");
-            System.out.println(resultOfQuery);
+            while(result.next()) {
+                result.next();
+                String resultOfQuery = result.getString("first_name");
+                System.out.println(resultOfQuery);
+            }
+
         }
-        catch(SQLException e){
+        catch(SQLException | NullPointerException e){
             e.printStackTrace();
         }
         launch();
