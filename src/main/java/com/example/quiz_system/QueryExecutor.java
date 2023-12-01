@@ -5,7 +5,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Klasa umożliwiająca wykonywanie zapytań
+ */
 public class QueryExecutor {
+
+    /**
+     * Wykonywanie selekcji(zapytań SELECT)
+     * @param selectQuery nasze zapytanie select
+     * @return wykonane zapytanie selekcji
+     */
     public ResultSet executeSelect(String selectQuery){
         try {
             Connection connection = DBConnector.connect();
@@ -18,6 +27,10 @@ public class QueryExecutor {
 
     }
 
+    /**
+     * Wykonywanie zapytań modyfikujących stan bazy danych(UPDATE,INSERT,DELETE)
+     * @param query zapytanie(inne niż SELECT)
+     */
     public void executeQuery(String query){
         try{
             Connection connection = DBConnector.connect();

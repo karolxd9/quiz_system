@@ -5,11 +5,18 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
+/**
+ * Klasa umożliwiająca łączenie z bazą danych
+ */
 public class DBConnector {
     private static String URL = "jdbc:mysql://127.0.0.1/platforma_testowa?autoReconnect=true&autoReconnectForPools=true";
     private static String USER = "root";
     private static String PASS = "";
 
+    /**
+     * Łączenie z bazą danych
+     * @return zwraca ustanowione połączenie
+     */
     public static Connection connect(){
         Connection connection = null;
         try {
