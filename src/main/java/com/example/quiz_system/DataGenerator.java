@@ -1,5 +1,6 @@
 package com.example.quiz_system;
 import java.lang.StringBuilder;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Locale;
@@ -11,11 +12,9 @@ import com.github.javafaker.Faker;
  */
 public class DataGenerator {
     private Faker faker;
-    private long maxIndexUser;
 
     public DataGenerator(){
         this.faker = new Faker(new Locale("pl-PL"));
-        this.maxIndexUser = -1;
     }
 
     /**
@@ -34,22 +33,30 @@ public class DataGenerator {
         return records;
     }
 
-    public long getMaxIndexUser() throws SQLException,NullPointerException {
-        DBConnector.connect();
+    /**
+     * Funkcja operacyjna do uzyskania największego(najmniejszego) numeru ID w tabeli z użytkownikami
+     * @param isMax czy szukamy największej wartości false - najmniejsza true - największa, domyślnie false
+     * @return wartość największego ID w tabeli z użytkownikami
+     * @throws SQLException
+     * @throws NullPointerException
+     */
+    public long getIndexUser(boolean isMax) throws SQLException,NullPointerException {
         long maxIndexUser = -1;
         try{
-            String query = "SELECT MAX(user_id) FROM user";
-            DBConnector.connect();
+            String query = "SELECT user_id FROM user ORDER BY user_id" + ((isMax) ? "DESC" : "") + "";
             QueryExecutor queryExecutor = new QueryExecutor();
             ResultSet queryResult = queryExecutor.executeSelect(query);
             queryResult.next();
-            maxIndexUser = queryResult.getInt("user_id");
+            maxIndexUser = queryResult.getLong("user_id");
 
         }
         catch(SQLException | NullPointerException e){
             e.printStackTrace();
         }
-
         return maxIndexUser;
     }
+
+
+
+
 }

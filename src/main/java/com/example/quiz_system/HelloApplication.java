@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -19,10 +20,10 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) throws SQLException{
-        DataGenerator initial = new DataGenerator();
-        StringBuilder result = initial.generateUsers(50);
-        System.out.println(initial.getMaxIndexUser());
+    public static void main(String[] args) throws SQLException {
+
+        DataGenerator generatedData = new DataGenerator();
+        System.out.println(generatedData.getIndexUser((boolean));
         launch();
     }
 }
