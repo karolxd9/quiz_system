@@ -42,7 +42,7 @@ public class DataGenerator {
      * @throws SQLException
      * @throws NullPointerException
      */
-    public long getIndex(boolean isMax,String column, String table) throws SQLException,NullPointerException {
+    public long getID(boolean isMax,String column, String table) throws SQLException,NullPointerException {
         long IndexUser = -1;
         String query = "SELECT " + column +" FROM "+table;
         try{
@@ -61,6 +61,14 @@ public class DataGenerator {
         }
         return IndexUser;
     }
+
+    /**
+     *
+     * @param minUserIndex najmniejsze ID użytkownika
+     * @param maxUserIndex największe ID użytkownika
+     * @return
+     */
+
 
 
 
