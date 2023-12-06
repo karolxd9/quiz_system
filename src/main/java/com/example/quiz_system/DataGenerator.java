@@ -63,11 +63,60 @@ public class DataGenerator {
     }
 
     /**
-     *
-     * @param minUserIndex najmniejsze ID użytkownika
-     * @param maxUserIndex największe ID użytkownika
+     * Sprawdza unikalność danej kolumny
+     * @param column nazwa kolumny
+     * @param table nazwa tabeli
+     * @param username nazwa loginu
      * @return
      */
+    public boolean isUnique(String column, String table, String username) throws SQLException{
+        int licznik = 0;
+        String query = "SELECT "+ column + " FROM "+ table + " WHERE "+ column + " = "+ "'"+ username + "'";
+        try{
+            QueryExecutor queryExecutor = new QueryExecutor();
+            ResultSet rs = queryExecutor.executeSelect(query);
+            while (rs.next()){
+                rs.next();
+                licznik++;
+            }
+        }
+        catch(SQLException e){
+            System.out.println("Błąd z bazą danych");
+        }
+        if(licznik == 0){
+            return true;
+        }
+        return false;
+
+    }
+
+    /**
+     * Generacja danych do tabeli user_login
+     * @param minUserIndex najmniejsze ID użytkownika
+     * @param maxUserIndex największe ID użytkownika
+     * @return wygenerowane dane w StringBuilder
+     */
+    public String generateLoginData(long minUserIndex,long maxUserIndex) throws SQLException{
+            StringBuilder records = new StringBuilder("");
+            String oneRecord = "";
+            String username = "";
+            try{
+                for(long i = minUserIndex; i<= maxUserIndex; i++){
+                    username = this.faker.name().username();
+                    if(isUnique("login_name","user_login",username)){
+                        oneRecord = i+","+username+";";
+                        records.append(oneRecord);
+                    }
+
+                }
+            }
+            catch(SQLException e){
+                System.out.println("Błąd z bazą danych");
+            }
+            return records.toString();
+
+    }
+
 
 
 

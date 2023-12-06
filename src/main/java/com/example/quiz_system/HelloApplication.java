@@ -23,7 +23,10 @@ public class HelloApplication extends Application {
     public static void main(String[] args) throws SQLException {
 
         DataGenerator generatedData = new DataGenerator();
-        System.out.println(generatedData.getID(true,"user_id","user"));
+        long minID = generatedData.getID(false,"user_id","user");
+        long maxID = generatedData.getID(true,"user_id","user");
+        //generatedData.generateLoginData(minID,maxID);
+        generatedData.generateLoginData(minID,maxID);
         launch();
     }
 

@@ -15,7 +15,7 @@ public class QueryExecutor {
      * @param selectQuery nasze zapytanie select
      * @return wykonane zapytanie selekcji
      */
-    public ResultSet executeSelect(String selectQuery){
+    public ResultSet executeSelect(String selectQuery) throws RuntimeException{
         try {
             Connection connection = DBConnector.connect();
             Statement statemant = connection.createStatement();
@@ -24,14 +24,13 @@ public class QueryExecutor {
         catch(SQLException e) {
             throw new RuntimeException("Błąd zapytania");
         }
-
     }
 
     /**
      * Wykonywanie zapytań modyfikujących stan bazy danych(UPDATE,INSERT,DELETE)
      * @param query zapytanie(inne niż SELECT)
      */
-    public void executeQuery(String query){
+    public void executeQuery(String query) throws RuntimeException{
         try{
             Connection connection = DBConnector.connect();
             Statement statemant = connection.createStatement();
