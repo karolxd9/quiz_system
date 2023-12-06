@@ -41,19 +41,23 @@ public class DataGenerator {
      * @throws NullPointerException
      */
     public long getIndexUser(boolean isMax) throws SQLException,NullPointerException {
-        long maxIndexUser = -1;
+        long IndexUser = -1;
+        String query = "SELECT user_id FROM user";
         try{
-            String query = "SELECT user_id FROM user ORDER BY user_id" + ((isMax) ? "DESC" : "") + "";
+            if(isMax == true) {
+                query = "SELECT user_id FROM user ORDER BY user_id DESC";
+            }
+
             QueryExecutor queryExecutor = new QueryExecutor();
             ResultSet queryResult = queryExecutor.executeSelect(query);
             queryResult.next();
-            maxIndexUser = queryResult.getLong("user_id");
+            IndexUser = queryResult.getLong("user_id");
 
         }
         catch(SQLException | NullPointerException e){
             e.printStackTrace();
         }
-        return maxIndexUser;
+        return IndexUser;
     }
 
 
