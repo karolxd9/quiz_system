@@ -34,18 +34,20 @@ public class DataGenerator {
     }
 
     /**
-     * Funkcja operacyjna do uzyskania największego(najmniejszego) numeru ID w tabeli z użytkownikami
-     * @param isMax czy szukamy największej wartości false - najmniejsza true - największa, domyślnie false
-     * @return wartość największego ID w tabeli z użytkownikami
+     * Funkcja operacyjna do uzyskania największego(najmniejszego) numeru ID w tabeli
+     * @param isMax czy szukamy największej wartości false - najmniejsza true - największa
+     * @param column nazwa kolimny
+     * @param table nazwa tabeli
+     * @return wartość największego ID w tabeli
      * @throws SQLException
      * @throws NullPointerException
      */
-    public long getIndexUser(boolean isMax) throws SQLException,NullPointerException {
+    public long getIndex(boolean isMax,String column, String table) throws SQLException,NullPointerException {
         long IndexUser = -1;
-        String query = "SELECT user_id FROM user";
+        String query = "SELECT " + column +" FROM "+table;
         try{
             if(isMax == true) {
-                query = "SELECT user_id FROM user ORDER BY user_id DESC";
+                query = "SELECT " + column +" FROM "+ table + " ORDER BY "+ column +" DESC";
             }
 
             QueryExecutor queryExecutor = new QueryExecutor();
@@ -59,6 +61,7 @@ public class DataGenerator {
         }
         return IndexUser;
     }
+
 
 
 
