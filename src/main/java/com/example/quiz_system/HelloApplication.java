@@ -23,6 +23,10 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) throws SQLException {
 
+        //liczba procesorów
+        SystemInfo systemInfo = new SystemInfo();
+        System.out.println(systemInfo.getNumberOfCore());
+
         //pobranie najmniejszej ID oraz największego ID użytkownika z bazy
         DataGenerator generatedData = new DataGenerator();
         long minID = generatedData.getID(false,"user_id","user");
@@ -38,6 +42,8 @@ public class HelloApplication extends Application {
 
         //wygenerowana liczba punktów niezbędna do uzyskania certyfikatu
         System.out.println(generatedData.certificationPoints());
+
+
 
     }
 

@@ -43,7 +43,7 @@ public class DataGenerator {
      * @throws SQLException
      * @throws NullPointerException
      */
-    public long getID(boolean isMax,String column, String table) throws SQLException,NullPointerException {
+    protected static long getID(boolean isMax,String column, String table) throws SQLException,NullPointerException {
         long IndexUser = -1;
         String query = "SELECT " + column +" FROM "+table;
         try{
@@ -120,12 +120,5 @@ public class DataGenerator {
         int Number = generatedNumber.nextInt(1000) + 100;
         return Number;
     }
-
-
-
-
-
-
-
 
 }
