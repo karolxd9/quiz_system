@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 
 public class HelloApplication extends Application {
     @Override
@@ -22,12 +23,19 @@ public class HelloApplication extends Application {
 
     public static void main(String[] args) throws SQLException {
 
+        //pobranie najmniejszej ID oraz największego ID użytkownika z bazy
         DataGenerator generatedData = new DataGenerator();
         long minID = generatedData.getID(false,"user_id","user");
         long maxID = generatedData.getID(true,"user_id","user");
-        //generatedData.generateLoginData(minID,maxID);
-        generatedData.generateLoginData(minID,maxID);
-        launch();
+        System.out.println(minID + " "+maxID);
+
+        // wygenerowanie pojedynczego loginu i hasła w SHA256
+        System.out.println(generatedData.generateUserLogin((int) (maxID+1)));
+
+
+        //wygenrowanie pojedynczej nazwy quizu(do celów testowych tożsame z nazwami aplikacji)
+        System.out.println(generatedData.quizName());
+
     }
 
 }

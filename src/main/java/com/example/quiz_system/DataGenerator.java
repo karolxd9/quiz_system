@@ -7,6 +7,11 @@ import java.util.Locale;
 
 import com.github.javafaker.Faker;
 
+import com.google.common.base.Charsets;
+import com.google.common.hash.HashCode;
+import com.google.common.hash.Hasher;
+import com.google.common.hash.Hashing;
+
 /**
  * Klasa umożliwiająca generację danych do bazy danych
  */
@@ -18,19 +23,13 @@ public class DataGenerator {
     }
 
     /**
-     * Generacja dla encji Użytkownik
-     * @param n liczba rekordów do generacji
-     * @return wygenerowane dane
+     * Generacja rekordu dla tabeli użytkownika
+     * @return wygenerowany rekord dla tabeli użytkownika
      */
-    public StringBuilder generateUsers(int n){
-        StringBuilder records = new StringBuilder();
+    protected String generateUser(){
         String oneRecord = "";
-        for(int i=0; i<n; i++){
-            oneRecord = this.faker.name().firstName() + ","+this.faker.name().firstName()+","+this.faker.name().lastName()+";";
-            records.append(oneRecord);
-            oneRecord = "";
-        }
-        return records;
+        oneRecord = this.faker.name().firstName() + ","+this.faker.name().firstName()+","+this.faker.name().lastName()+";";
+        return oneRecord;
     }
 
     /**
@@ -89,7 +88,33 @@ public class DataGenerator {
         return false;
 
     }
-    
+
+    /**
+     * Generacja pojedynczego rekordu w tabeli z danymi logowania
+     * @param id Numer identyfikacyjny użytkownika
+     * @return
+     */
+    protected String generateUserLogin(int id){
+        String oneRecord = "";
+        String password = this.faker.internet().password(10,20);
+        Hasher hasher = Hashing.sha256().newHasher();
+        hasher.putString(password, Charsets.UTF_8);
+        HashCode sha256 = hasher.hash();
+        String sha256Text = sha256.toString();
+        oneRecord = oneRecord + id + "," + this.faker.name().username() + "," + sha256Text + ";";
+        return oneRecord;
+    }
+
+    /**
+     * Przykładowa nazwa quizu
+     * @return nazwa quizu w języku polsim
+     */
+    protected String quizName(){
+        return this.faker.app().name();
+    }
+
+
+
 
 
 
