@@ -36,6 +36,9 @@ public class HelloApplication extends Application {
         //wygenrowanie pojedynczej nazwy quizu(do celów testowych tożsame z nazwami aplikacji)
         System.out.println(generatedData.quizName());
 
+        //wygenerowana liczba punktów niezbędna do uzyskania certyfikatu
+        System.out.println(generatedData.certificationPoints());
+
     }
 
 }

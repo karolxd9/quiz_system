@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Locale;
+import java.util.Random;
+import java.util.random.RandomGenerator;
 
 import com.github.javafaker.Faker;
 
@@ -113,7 +115,11 @@ public class DataGenerator {
         return this.faker.app().name();
     }
 
-
+    protected int certificationPoints(){
+        Random generatedNumber = new Random();
+        int Number = generatedNumber.nextInt(1000) + 100;
+        return Number;
+    }
 
 
 
