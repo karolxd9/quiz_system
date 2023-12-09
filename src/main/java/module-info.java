@@ -11,4 +11,6 @@ module com.example.quiz_system {
     exports com.example.quiz_system;
     exports com.conf;
     opens com.conf to javafx.fxml;
+    exports com.generator;
+    opens com.generator to javafx.fxml;
 }

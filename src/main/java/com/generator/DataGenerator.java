@@ -1,4 +1,4 @@
-package com.example.quiz_system;
+package com.generator;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Locale;
@@ -26,7 +26,7 @@ public class DataGenerator {
      * Generacja rekordu dla tabeli użytkownika
      * @return wygenerowany rekord dla tabeli użytkownika
      */
-    protected String generateUser(){
+    public String generateUser(){
         String oneRecord = "";
         oneRecord = this.faker.name().firstName() + ","+this.faker.name().firstName()+","+this.faker.name().lastName()+";";
         return oneRecord;
@@ -41,7 +41,7 @@ public class DataGenerator {
      * @throws SQLException
      * @throws NullPointerException
      */
-    protected static long getID(boolean isMax,String column, String table) throws SQLException,NullPointerException {
+    public static long getID(boolean isMax,String column, String table) throws SQLException,NullPointerException {
         long IndexUser = -1;
         String query = "SELECT " + column +" FROM "+table;
         try{
@@ -94,7 +94,7 @@ public class DataGenerator {
      * @param id Numer identyfikacyjny użytkownika
      * @return
      */
-    protected String generateUserLogin(int id){
+    public String generateUserLogin(int id){
         String oneRecord = "";
         String password = this.faker.internet().password(10,20);
         Hasher hasher = Hashing.sha256().newHasher();
@@ -109,11 +109,11 @@ public class DataGenerator {
      * Przykładowa nazwa quizu
      * @return nazwa quizu w języku polsim
      */
-    protected String quizName(){
+    public String quizName(){
         return this.faker.app().name();
     }
 
-    protected int certificationPoints(){
+    public int certificationPoints(){
         Random generatedNumber = new Random();
         int Number = generatedNumber.nextInt(1000) + 100;
         return Number;
