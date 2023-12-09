@@ -1,4 +1,4 @@
-package com.example.quiz_system;
+package com.conf;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

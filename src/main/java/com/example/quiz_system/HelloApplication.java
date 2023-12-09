@@ -1,15 +1,13 @@
 package com.example.quiz_system;
 
+import com.conf.SystemInfo;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLOutput;
 
 public class HelloApplication extends Application {
     @Override
@@ -24,8 +22,8 @@ public class HelloApplication extends Application {
     public static void main(String[] args) throws SQLException {
 
         //liczba procesorów
-        SystemInfo systemInfo = new SystemInfo();
-        System.out.println(systemInfo.getNumberOfCore());
+        SystemInfo system = new SystemInfo();
+        System.out.println(system.getNumberOfCore());
 
         //pobranie najmniejszej ID oraz największego ID użytkownika z bazy
         DataGenerator generatedData = new DataGenerator();
@@ -43,6 +41,8 @@ public class HelloApplication extends Application {
         //wygenerowana liczba punktów niezbędna do uzyskania certyfikatu
         System.out.println(generatedData.certificationPoints());
 
+        ParallelDataGenerator results = new ParallelDataGenerator(system);
+        System.out.println(results.ParallelGeneratingUsers(23));
 
 
     }

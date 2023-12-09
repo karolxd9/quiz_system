@@ -1,14 +1,15 @@
-package com.example.quiz_system;
+package com.conf;
 
 public class SystemInfo {
     private int numberOfCore;
 
     public SystemInfo(){
-        this.numberOfCore = Runtime.getRuntime().availableProcessors();
+        numberOfCore = Runtime.getRuntime().availableProcessors();
     }
 
     public int getNumberOfCore(){
         return this.numberOfCore;
     }
+
 
 }

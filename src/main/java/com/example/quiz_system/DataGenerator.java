@@ -1,12 +1,10 @@
 package com.example.quiz_system;
-import java.lang.StringBuilder;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Locale;
 import java.util.Random;
-import java.util.random.RandomGenerator;
 
+import com.conf.QueryExecutor;
 import com.github.javafaker.Faker;
 
 import com.google.common.base.Charsets;

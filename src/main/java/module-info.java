@@ -9,4 +9,6 @@ module com.example.quiz_system {
 
     opens com.example.quiz_system to javafx.fxml;
     exports com.example.quiz_system;
+    exports com.conf;
+    opens com.conf to javafx.fxml;
 }
