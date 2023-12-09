@@ -107,7 +107,7 @@ public class DataGenerator {
 
     /**
      * Przykładowa nazwa quizu
-     * @return nazwa quizu w języku polsim
+     * @return nazwa quizu w języku polskim
      */
     public String quizName(){
         return this.faker.app().name();

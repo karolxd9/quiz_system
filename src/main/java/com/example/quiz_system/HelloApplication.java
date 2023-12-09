@@ -2,7 +2,7 @@ package com.example.quiz_system;
 
 import com.conf.SystemInfo;
 import com.generator.DataGenerator;
-import com.generator.ParallelDataGenerator;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -40,19 +40,6 @@ public class HelloApplication extends Application {
         //wygenrowanie pojedynczej nazwy quizu(do celów testowych tożsame z nazwami aplikacji)
         System.out.println(generatedData.quizName());
 
-        //wygenerowana liczba punktów niezbędna do uzyskania certyfikatu
-        System.out.println(generatedData.certificationPoints());
-        ParallelDataGenerator results = new ParallelDataGenerator(system);
-
-        long time1_1 = System.currentTimeMillis();
-        System.out.println(results.ParallelGeneratingUsers(1000));
-        long time1_2 = System.currentTimeMillis();
-        System.out.println("Czas równoległy: "+(long)(time1_2-time1_1));
-
-       /* long time2_1 = System.currentTimeMillis();
-        System.out.println(results.SingleGeneratingUsers(1000));
-        long time2_2 = System.currentTimeMillis();
-        System.out.println("Czas normalny: "+(long)(time2_2-time2_1));*/
 
         launch();
 
