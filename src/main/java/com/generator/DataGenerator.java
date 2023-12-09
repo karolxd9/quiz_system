@@ -24,7 +24,7 @@ public class DataGenerator {
 
     /**
      * Generacja rekordu dla tabeli użytkownika
-     * @return wygenerowany rekord dla tabeli użytkownika
+     * @return wygenerowany rekord dla tabeli użytkownika d
      */
     public String generateUser(){
         String oneRecord = "";
