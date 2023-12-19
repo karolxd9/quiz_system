@@ -1,8 +1,9 @@
 package com.example.quiz_system;
 
+import com.conf.DBConnector;
 import com.conf.SystemInfo;
-import com.generator.DataGenerator;
 
+/*import com.generator.UsersParallelGenerator;*/
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -21,33 +22,10 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
-    public static void main(String[] args) throws SQLException {
-
-        //liczba procesorów
-        SystemInfo system = new SystemInfo();
-        System.out.println(system.getNumberOfCore());
-
-        //pobranie najmniejszej ID oraz największego ID użytkownika z bazy
-        DataGenerator generatedData = new DataGenerator();
-        long minID = generatedData.getID(false,"user_id","user");
-        long maxID = generatedData.getID(true,"user_id","user");
-        System.out.println(minID + " "+maxID);
-
-        // wygenerowanie pojedynczego loginu i hasła w SHA256
-        System.out.println(generatedData.generateUserLogin((int) (maxID+1)));
-
-
-        //wygenrowanie pojedynczej nazwy quizu(do celów testowych tożsame z nazwami aplikacji)
-        System.out.println(generatedData.quizName());
-
-
+    public static void main(String[] args) throws SQLException, InterruptedException {
+        DBConnector.connect();
+        SystemInfo info = new SystemInfo();
         launch();
-
-
-
-
-
-
     }
 
 }

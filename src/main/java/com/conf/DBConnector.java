@@ -21,9 +21,11 @@ public class DBConnector {
         Connection connection = null;
         try {
            connection = DriverManager.getConnection(URL, USER, PASS);
+            System.out.println("Udało się");
         }
         catch(SQLException e){
             e.printStackTrace();
+            System.out.println("Bład");
         }
 
         return connection;

@@ -5,6 +5,7 @@ import java.util.Locale;
 import java.util.Random;
 
 import com.conf.QueryExecutor;
+import com.conf.SystemInfo;
 import com.github.javafaker.Faker;
 
 import com.google.common.base.Charsets;
@@ -16,10 +17,59 @@ import com.google.common.hash.Hashing;
  * Klasa umożliwiająca generację danych do bazy danych
  */
 public class DataGenerator {
-    private Faker faker;
+    private Faker faker; // genrator danych
+    private int forUsers; //liczba użytkowników
+    private SystemInfo info; //informacje o sprzęcie, na którym uruchomiona zostanie aplikacja
+    private int recordPerThread; //liczba rekordów do wygenerowania w jednym wątku
+    private int nThreads; //liczba wątków
 
-    public DataGenerator(){
+    /*
+        Liczba rekordów, które nie zostały wygenerowana
+        współbieżnie(wynikiem każdego z wątku będzie taka sama liczba wyjątków,
+        lecz reszta z podziału tego zasobu do wątku zostanie wykonana jednowątkowo)
+     */
+    private int leftRecords;
+
+    public DataGenerator(int forUsers,SystemInfo info){
         this.faker = new Faker(new Locale("pl-PL"));
+        this.forUsers = forUsers;
+        this.info = info;
+        this.nThreads = info.getNumberOfCore();
+        this.recordPerThread = (this.forUsers) / (this.info.getNumberOfCore());
+        if(this.recordPerThread == 0){
+            this.leftRecords = this.forUsers;
+        }
+        else{
+            this.leftRecords = this.forUsers % this.recordPerThread;
+        }
+    }
+
+    /**
+     * @return liczba użytkowników do wygenerowania
+     */
+    public int getForUsers(){
+        return this.forUsers;
+    }
+
+    /**
+     * @return informacje o sprzęcie
+     */
+    public SystemInfo getInfo(){
+        return this.info;
+    }
+
+    /**
+     * @return liczba rekordów do wygenerowania przez wątek
+     */
+    public int getRecordPerThread() {
+        return this.recordPerThread;
+    }
+
+    /**
+     * @return Liczba pozostałych wątków do wykonanie nierównoległego
+     */
+    public int getLeftRecords() {
+        return this.leftRecords;
     }
 
     /**
@@ -113,6 +163,10 @@ public class DataGenerator {
         return this.faker.app().name();
     }
 
+    /**
+     * Generacja potrzebnej liczbt punktów, aby otrzymać certyfikat
+     * @return Number liczba punktów potrzebnych do uzyskania certyfikatu
+     */
     public int certificationPoints(){
         Random generatedNumber = new Random();
         int Number = generatedNumber.nextInt(1000) + 100;
