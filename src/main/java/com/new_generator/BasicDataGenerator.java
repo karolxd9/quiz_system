@@ -5,19 +5,26 @@ import com.github.javafaker.Faker;
 import java.util.Locale;
 
 /**
- * Klasa umożliwiająca generowanie danych
+ * Klasa dająca podstawę do generowanie danych
  */
-public abstract class BasicDataGenerator<T> {
-    public T typeOfData; //rodzaj danych poddany do generowania
+public abstract class BasicDataGenerator<V,T> {
+    public V typeOfData; //rodzaj danych poddany do generowania
     private Faker faker; // genrator danych
 
-    /**
-     * Metoda genruje pojedyncze dane
-     * @param typeOfData
-     */
-    public generateData(T typeOfData){
+
+    public BasicDataGenerator(V typeOfData){
         this.faker = new Faker(new Locale("pl-PL"));
         this.typeOfData = typeOfData;
     }
+
+    /**
+     * Metoda genruje pojedyncze wiersze danych
+     *
+     * @return
+     */
+    T generate() {
+        return null;
+    }
+
 
 }
