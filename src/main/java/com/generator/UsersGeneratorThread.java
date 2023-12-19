@@ -1,3 +1,4 @@
+/*
 package com.generator;
 
 import com.conf.SystemInfo;
@@ -22,3 +23,4 @@ public class UsersGeneratorThread extends DataGenerator implements Callable<Stri
         return result;
     }
 }
+*/
