@@ -7,9 +7,7 @@ import java.util.concurrent.Callable;
  * Klasa do generacji danych użytkownika
  */
 public class UserGenerator extends BasicDataGenerator{
-    public UserGenerator(Object typeOfData) {
-        super(typeOfData);
-    }
+
 
     /**
      * generacja użytkownika

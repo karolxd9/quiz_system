@@ -9,9 +9,7 @@ import com.google.common.hash.Hashing;
 public class LoginDataGenerator extends  BasicDataGenerator{
 
 
-    public LoginDataGenerator(Object typeOfData) {
-        super(typeOfData);
-    }
+
 
     /**
      * Generacja danych logowania dla użytkownika

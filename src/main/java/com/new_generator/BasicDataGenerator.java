@@ -11,13 +11,12 @@ import java.util.Locale;
  * Klasa dająca podstawę do generowanie danych
  */
 public abstract class BasicDataGenerator<V,T> {
-    public V typeOfData; //rodzaj danych poddany do generowania
+
     private Faker faker; // genrator danych
 
 
-    public BasicDataGenerator(V typeOfData){
+    public BasicDataGenerator(){
         this.faker = new Faker(new Locale("pl-PL"));
-        this.typeOfData = typeOfData;
     }
 
     /**

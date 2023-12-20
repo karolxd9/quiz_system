@@ -4,6 +4,7 @@ import com.conf.DBConnector;
 import com.conf.SystemInfo;
 
 /*import com.generator.UsersParallelGenerator;*/
+import com.new_generator.LoginDataGenerator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,6 +12,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashSet;
+import java.util.Set;
 
 public class HelloApplication extends Application {
     @Override
@@ -26,6 +29,8 @@ public class HelloApplication extends Application {
         DBConnector.connect();
         SystemInfo info = new SystemInfo();
         launch();
+        s
+
     }
 
 }
