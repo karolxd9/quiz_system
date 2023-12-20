@@ -13,6 +13,11 @@ public class LoginDataGenerator extends  BasicDataGenerator{
         super(typeOfData);
     }
 
+    /**
+     * Generacja danych logowania dla użytkownika
+     * @param id identyfikator użytkownika
+     * @return pojedynczy rekord
+     */
     public String generate(int id){
 
         String oneRecord = "";

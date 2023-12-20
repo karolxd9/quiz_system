@@ -13,7 +13,7 @@ public class UserGenerator extends BasicDataGenerator{
 
     /**
      * generacja użytkownika
-     * @return
+     * @return rekord z danymi użytkownika
      */
     public String generate(){
         String oneRecord = "";
