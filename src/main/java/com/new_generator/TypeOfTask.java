@@ -1,7 +1,7 @@
 package com.new_generator;
 
 /**
- * Typ wyliczeniowy do określenia trudności zadania
+ * Typ wyliczeniowy do określenia rodzaj zadań
  */
 public enum TypeOfTask {
     OTWARTE, //zadania wymagające otwartej odpowiedzi
