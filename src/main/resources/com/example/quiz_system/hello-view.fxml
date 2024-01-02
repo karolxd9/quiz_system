@@ -1,16 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.quiz_system.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
-
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #7acedc; -fx-border-color: #212962; -fx-border-width: 14px;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <Group BorderPane.alignment="CENTER">
+         <children>
+            <BorderPane>
+               <top>
+                  <Label contentDisplay="RIGHT" scaleShape="false" text="USERNAME" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <graphic>
+                        <TextField>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
+                     </graphic>
+                  </Label>
+               </top>
+               <bottom>
+                  <Label contentDisplay="RIGHT" text="PASSWORD" BorderPane.alignment="CENTER">
+                     <graphic>
+                        <PasswordField>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </PasswordField>
+                     </graphic>
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </bottom>
+            </BorderPane>
+         </children>
+      </Group>
+   </center>
+</BorderPane>
