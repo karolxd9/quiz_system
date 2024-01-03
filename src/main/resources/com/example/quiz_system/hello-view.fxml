@@ -1,49 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: #7acedc; -fx-border-color: #212962; -fx-border-width: 14px;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-   <center>
-      <Group BorderPane.alignment="CENTER">
-         <children>
-            <BorderPane>
-               <top>
-                  <Label contentDisplay="RIGHT" scaleShape="false" text="USERNAME" BorderPane.alignment="CENTER">
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                     <opaqueInsets>
-                        <Insets />
-                     </opaqueInsets>
-                     <graphic>
-                        <TextField>
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </TextField>
-                     </graphic>
-                  </Label>
-               </top>
-               <bottom>
-                  <Label contentDisplay="RIGHT" text="PASSWORD" BorderPane.alignment="CENTER">
-                     <graphic>
-                        <PasswordField>
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </PasswordField>
-                     </graphic>
-                     <font>
-                        <Font name="System Bold" size="15.0" />
-                     </font>
-                  </Label>
-               </bottom>
-            </BorderPane>
-         </children>
-      </Group>
-   </center>
-</BorderPane>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button layoutX="175.0" layoutY="208.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="93.0" text="Zarejestruj" />
+      <Button layoutX="309.0" layoutY="208.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="94.0" text="Zaloguj" />
+      <Label layoutX="176.0" layoutY="70.0" prefHeight="34.0" prefWidth="75.0" text="LOGIN" />
+   </children>
+</AnchorPane>

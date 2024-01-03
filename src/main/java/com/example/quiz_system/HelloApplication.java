@@ -1,5 +1,7 @@
 package com.example.quiz_system;
 
+import com.auth.Auth;
+import com.auth.SHA256Hashing;
 import com.conf.DBConnector;
 import com.conf.SystemInfo;
 
@@ -12,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.Set;
@@ -28,8 +31,10 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) throws SQLException, InterruptedException {
-        DBConnector.connect();
+
         SystemInfo info = new SystemInfo();
+        Auth logowanie = new Auth();
+        logowanie.login1step("oskareczek","koteczek");
         launch();
     }
 

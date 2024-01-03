@@ -41,4 +41,16 @@ public class QueryExecutor {
         }
 
     }
+
+    /**
+     * Liczy ilość wierszy po wykonaniu zapytania
+     * @param queryResult liczba wierszy
+     */
+    public int countRows(ResultSet queryResult) throws SQLException {
+        int count = 0;
+        while(queryResult.next()){
+            count++;
+        }
+        return count;
+    }
 }
