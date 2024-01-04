@@ -53,4 +53,25 @@ public class QueryExecutor {
         }
         return count;
     }
+
+    public boolean isUnique(String column, String table, String username) throws SQLException{
+        int licznik = 0;
+        String query = "SELECT "+ column + " FROM "+ table + " WHERE "+ column + " = "+ "'"+ username + "'";
+        try{
+            QueryExecutor queryExecutor = new QueryExecutor();
+            ResultSet rs = queryExecutor.executeSelect(query);
+            while (rs.next()){
+                rs.next();
+                licznik++;
+            }
+        }
+        catch(SQLException e){
+            System.out.println("Błąd z bazą danych");
+        }
+        if(licznik == 0){
+            return true;
+        }
+        return false;
+
+    }
 }

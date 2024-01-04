@@ -1,6 +1,7 @@
 package com.example.quiz_system;
 
 import com.auth.Auth;
+import com.auth.Register;
 import com.auth.SHA256Hashing;
 import com.conf.DBConnector;
 import com.conf.SystemInfo;
@@ -35,6 +36,8 @@ public class HelloApplication extends Application {
         SystemInfo info = new SystemInfo();
         Auth logowanie = new Auth();
         logowanie.login1step("oskareczek","koteczek");
+        Register rejestruj = new Register("Karol","Przybycin","oskar12345","Masochista123");
+        System.out.println(rejestruj.isOK());
         launch();
     }
 
