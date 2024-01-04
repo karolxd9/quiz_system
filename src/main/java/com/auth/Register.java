@@ -4,6 +4,7 @@ import com.conf.QueryExecutor;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Locale;
 
 public class Register {
     private String first_name;
@@ -85,6 +86,26 @@ public class Register {
         return false;
     }
 
+
+
+    /**
+     * Sprawdza poprawność imienia(nazwisko również)
+     * @param name imię podane przez użytkownika
+     * @return sprawdzenie poprawności imienia
+     */
+    public boolean includeNameConditions(String name){
+        String nameStatrsWithUpperCase = name.replace("\\s","");
+        int len = nameStatrsWithUpperCase.length();
+        if(len == 0) return false; //Czy imię nie jest puste
+        //czy zawiera znak niebędący literą
+        for(int i=0;i< len;i++){
+            if((int)(nameStatrsWithUpperCase.charAt(i))<97 && (int)(nameStatrsWithUpperCase.charAt(i))>122){
+                return false;
+            }
+        }
+        return true;
+    }
+
     /**
      * Sprawdza czy wszytsko zostało wprowadzone poprawnie
      * @return wynik weryfikacji wprowadzonych danych
@@ -92,9 +113,22 @@ public class Register {
     public boolean isOK() throws SQLException {
         boolean loginState = false;
         boolean passState = false;
+        boolean firstNameState = false;
+        boolean surnameState = false;
+        boolean secondNameState = false;
         passState = includePasswordConditions(this.password);
         loginState = includeLoginConditions(this.login);
-        return (passState && loginState);
+        firstNameState = includeNameConditions(this.first_name);
+        surnameState = includeNameConditions(this.second_name);
+
+
+        String secondName = this.second_name.replaceAll("\\s","");
+        if(secondName == "") secondNameState = true;
+        else{
+            secondNameState = includeNameConditions(secondName);
+        }
+
+        return (passState && loginState && firstNameState && secondNameState && surnameState);
     }
 
 }
