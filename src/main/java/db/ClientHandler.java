@@ -18,7 +18,7 @@ public class ClientHandler implements Callable {
     public ClientHandler(Socket clientSocket){
         this.clientSocket = clientSocket;
     }
-    public String addQuery(String query){
+    public synchronized String addQuery(String query){
         this.query = query;
         return query;
     }
@@ -33,6 +33,7 @@ public class ClientHandler implements Callable {
 
             QueryExecutor queryExecutor = new QueryExecutor();
             ResultSet resultSet = queryExecutor.executeSelect(this.query);
+
             return resultSet;
 
         }
