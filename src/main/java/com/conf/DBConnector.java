@@ -9,7 +9,7 @@ import java.sql.SQLException;
  * Klasa umożliwiająca łączenie z bazą danych
  */
 public class DBConnector {
-    private static String URL = "jdbc:mysql://127.0.0.1:3306";
+    private static String URL = "jdbc:mysql://127.0.0.1:3306/platforma_testowa";
     private static String USER = "root";
     private static String PASS = "";
 

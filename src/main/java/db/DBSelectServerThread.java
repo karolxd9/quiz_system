@@ -7,7 +7,10 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
@@ -38,15 +41,24 @@ public class DBSelectServerThread {
                 BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 String clientQuery = in.readLine();
                 System.out.println("Połączono z klientem " + clientSocket.getInetAddress());
-                FutureTask<Void> futureTask = new FutureTask<>(new ClientHandler(clientSocket,clientQuery));
+                System.out.println(clientQuery);
+                FutureTask futureTask = new FutureTask<>(new ClientHandler(clientSocket,clientQuery));
                 this.executor.execute(futureTask);
+                ResultSet r1 = (ResultSet) futureTask.get();
+                ObjectOutputStream toClient = new ObjectOutputStream(clientSocket.getOutputStream());
+                toClient.writeObject(r1);
+
+
 
             }
         }
         catch (IOException e){
             e.printStackTrace();
-        }
-        finally {
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } finally {
             executor.shutdown();
         }
     }

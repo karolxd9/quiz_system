@@ -1,6 +1,5 @@
 package com.example.quiz_system;
 
-import com.conf.QueryExecutor;
 import com.conf.SystemInfo;
 
 /*import com.generator.UsersParallelGenerator;*/
@@ -12,7 +11,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -38,10 +36,6 @@ public class HelloApplication extends Application {
 
         DBSelectServerThread dbServer = new DBSelectServerThread(threads);
         dbServer.main();
-        /*QueryExecutor queryExecutor = new QueryExecutor();
-        ResultSet resultSet = queryExecutor.executeSelect("SELECT * FROM platforma_testowa.quiz");
-        resultSet.next();
-        System.out.println(resultSet.getString("quiz_name"));*/
         launch();
     }
 

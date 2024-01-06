@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 
 public class ClientHandler implements Callable {
 
@@ -23,12 +24,14 @@ public class ClientHandler implements Callable {
 
 
     @Override
-    public ResultSet call(){
+    public ResultSet call() throws IOException, ClassNotFoundException {
+        ObjectInputStream fromServer = new ObjectInputStream(clientSocket.getInputStream());
         try{
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(),true);
             out.println(this.query);
             QueryExecutor queryExecutor = new QueryExecutor();
-            ResultSet resultSet = queryExecutor.executeSelect(this.query);
+            ResultSet resultSet = (ResultSet) fromServer.readObject();
+
             return resultSet;
 
         }
