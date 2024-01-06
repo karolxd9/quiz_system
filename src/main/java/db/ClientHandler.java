@@ -9,38 +9,37 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
 
 public class ClientHandler implements Callable {
 
     private final Socket clientSocket;
-    private String query = "";
+    private String query;
 
-    public ClientHandler(Socket clientSocket,String query){
+    public ClientHandler(Socket clientSocket){
         this.clientSocket = clientSocket;
-        this.query = query;
     }
-
+    public synchronized String addQuery(String query){
+        this.query = query;
+        return query;
+    }
 
 
     @Override
     public ResultSet call(){
-        ObjectInputStream fromServer;
-        try{
-            fromServer = new ObjectInputStream(clientSocket.getInputStream());
-            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(),true);
-            out.println(this.query);
+        try(PrintWriter out = new PrintWriter(clientSocket.getOutputStream(),true);
+            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))){
+            String inputLine;
+
+
             QueryExecutor queryExecutor = new QueryExecutor();
-            ResultSet resultSet = (ResultSet) (fromServer.readObject());
+            ResultSet resultSet = queryExecutor.executeSelect(this.query);
+
             return resultSet;
+
         }
         catch(IOException e){
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
-
         return null;
-
     }
 }

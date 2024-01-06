@@ -1,46 +1,51 @@
-
 package db;
-import com.conf.SystemInfo;
 
+import com.conf.DBConnector;
+import com.conf.SystemInfo;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 
 public class DBSelectServerThread {
-    private ArrayList<DBSelectServerThread> threadList;
-    private ExecutorService executor;
+    private Socket socket;
+    private ArrayList<DBSelectServerThread>threadList;
+    private int port;
+    private String query;
 
-    public DBSelectServerThread(ArrayList<DBSelectServerThread> threadList) {
+    private int howManyThread;
+    private PrintWriter output;
+    ExecutorService executor;
+    public DBSelectServerThread(ArrayList<DBSelectServerThread>threadList){
         SystemInfo info = new SystemInfo();
         this.threadList = threadList;
         int howManyThread = info.getNumberOfCore();
         this.executor = Executors.newFixedThreadPool(howManyThread);
+
     }
 
     public void main() {
-        try (ServerSocket serverSocket = new ServerSocket(60000)) {
+        try (ServerSocket serverSocket = new ServerSocket(6000)) {
+
+            //BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            //output = new PrintWriter(socket.getOutputStream(),true);
+
             while (true) {
+
                 Socket clientSocket = serverSocket.accept();
-                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                ObjectOutputStream out = new ObjectOutputStream(new ObjectOutputStream(clientSocket.getOutputStream()));
                 System.out.println("Połączono z klientem " + clientSocket.getInetAddress());
-                FutureTask<ResultSet> futureTask = new FutureTask<>(new ClientHandler(clientSocket, in.readLine()));
+                FutureTask<Void> futureTask = new FutureTask<>(new ClientHandler(clientSocket));
                 this.executor.execute(futureTask);
-                out.writeObject(futureTask.get());
+
             }
-        } catch (IOException e) {
+        }
+        catch (IOException e){
             e.printStackTrace();
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
         }
     }
+
 }
