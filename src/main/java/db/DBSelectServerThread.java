@@ -6,6 +6,7 @@ import com.conf.SystemInfo;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -29,15 +30,13 @@ public class DBSelectServerThread {
     }
 
     public void main() {
-        try (ServerSocket serverSocket = new ServerSocket(6000)) {
-
-            //BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            //output = new PrintWriter(socket.getOutputStream(),true);
+        try (ServerSocket serverSocket = new ServerSocket(60000)) {
 
             while (true) {
 
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("Połączono z klientem " + clientSocket.getInetAddress());
+                Connection dbConnection = DBConnector.connect();
                 FutureTask<Void> futureTask = new FutureTask<>(new ClientHandler(clientSocket));
                 this.executor.execute(futureTask);
 
