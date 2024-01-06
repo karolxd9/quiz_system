@@ -1,9 +1,16 @@
 package com.conf;
 
+import db.ClientHandler;
+
+import java.net.Socket;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
 
 /**
  * Klasa umożliwiająca wykonywanie zapytań
@@ -46,7 +53,7 @@ public class QueryExecutor {
      * Liczy ilość wierszy po wykonaniu zapytania
      * @param queryResult liczba wierszy
      */
-    public int countRows(ResultSet queryResult) throws SQLException {
+    public static int countRows(ResultSet queryResult) throws SQLException {
         int count = 0;
         while(queryResult.next()){
             count++;
@@ -54,24 +61,54 @@ public class QueryExecutor {
         return count;
     }
 
-    public boolean isUnique(String column, String table, String username) throws SQLException{
+    /**
+     *
+     * @param column
+     * @param table
+     * @param username
+     * @return
+     * @throws SQLException
+     */
+
+    /**
+     * Sprawdzenie czy dana wartość występuje w kolumnie
+     * @param column nazwa kolumny
+     * @param table nazwa tabeli
+     * @param username wartość, której występowalność sprawdzamy w kolumnie danej tabeli
+     * @return wartość czy dana wartośc występuje w kolumnie danej tabeli
+     * @throws SQLException
+     */
+    public static boolean lackValue(String column, String table, String username,Socket socket) throws SQLException {
         int licznik = 0;
         String query = "SELECT "+ column + " FROM "+ table + " WHERE "+ column + " = "+ "'"+ username + "'";
-        try{
-            QueryExecutor queryExecutor = new QueryExecutor();
-            ResultSet rs = queryExecutor.executeSelect(query);
-            while (rs.next()){
-                rs.next();
-                licznik++;
-            }
-        }
-        catch(SQLException e){
-            System.out.println("Błąd z bazą danych");
-        }
+        ResultSet resultSet = QueryExecutor.result(query,socket);
+        licznik = QueryExecutor.countRows(resultSet);
+
         if(licznik == 0){
             return true;
         }
         return false;
 
+    }
+
+    /**
+     * Przetwarzanie danego zapytania selekcji za pomocą klienta;
+     * @param query zapytanie selekcji
+     * @param socket gniazdo sieciowe do komunikacji
+     * @return wynik zapytania selekcji
+     */
+    public static ResultSet result(String query,Socket socket){
+        ClientHandler clientHandler = new ClientHandler(socket);
+        clientHandler.addQuery(query);
+        FutureTask task = new FutureTask<>(clientHandler);
+        GlobalSettings.exec.execute(task);
+        ResultSet resultSet = null;
+        try {
+            resultSet = (ResultSet) task.get();
+        }
+        catch (InterruptedException | ExecutionException e){
+            e.printStackTrace();
+        }
+        return resultSet;
     }
 }

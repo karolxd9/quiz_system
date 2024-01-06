@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.Callable;
 
+//klasa wspomagająca współbieżne odpytywanie serwera o wynik zapytania selekcji
 public class ClientHandler implements Callable {
 
     private final Socket clientSocket;
@@ -24,6 +25,10 @@ public class ClientHandler implements Callable {
     }
 
 
+    /**
+     * Klient odpytujący serwer o wyniki zapytania selekcji
+     * @return wynik zapytania
+     */
     @Override
     public ResultSet call(){
         try(PrintWriter out = new PrintWriter(clientSocket.getOutputStream(),true);

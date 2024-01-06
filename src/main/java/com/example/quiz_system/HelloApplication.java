@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -27,12 +28,12 @@ public class HelloApplication extends Application {
     }
 
     public static void main(String[] args) throws SQLException, InterruptedException, UnknownHostException, IOException {
-
         SystemInfo info = new SystemInfo();
         /*Auth logowanie = new Auth();
         logowanie.login1step("oskareczek","koteczek");
         Register rejestruj = new Register("Karol","Przybycin","oskar12345","Masochista123");
         System.out.println(rejestruj.isOK());*/
+       // Socket socket = new Socket("192.168.0.103",6000);
         ArrayList<DBSelectServerThread>threads = new ArrayList<>();
         DBSelectServerThread dbServer = new DBSelectServerThread(threads);
         dbServer.main();

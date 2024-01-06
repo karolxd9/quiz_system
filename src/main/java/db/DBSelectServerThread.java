@@ -11,6 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 
+//serwer do współbieżnej obsługi zapytań selekcji bazy danych
 public class DBSelectServerThread {
     private Socket socket;
     private ArrayList<DBSelectServerThread>threadList;
@@ -28,6 +29,9 @@ public class DBSelectServerThread {
 
     }
 
+    /**
+     * Świadczy usługę dostarczania zasobów z zapytania
+     */
     public void main() {
         try (ServerSocket serverSocket = new ServerSocket(6000)) {
 

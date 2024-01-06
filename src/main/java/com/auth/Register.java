@@ -2,6 +2,7 @@ package com.auth;
 
 import com.conf.QueryExecutor;
 
+import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Locale;
@@ -12,11 +13,14 @@ public class Register {
     private String login;
     private String password;
 
-    public Register(String first_name,String second_name, String login, String password){
+    private Socket socket;
+
+    public Register(String first_name,String second_name, String login, String password,Socket socket){
         this.first_name = first_name;
         this.second_name = second_name;
         this.login = login;
         this.password = password;
+        this.socket = socket;
     }
 
     /**
@@ -47,33 +51,14 @@ public class Register {
 
 
     /**
-     * Sprawdza unikalność wartości w kolumnie
+     * Sprawdza występowalność wartości w kolumnie
      * @param column nazwa kolumny
      * @param table nazwa tabeli
      * @param username nazwa szukanej wartości
-     * @return wynik testu unikalności
+     * @return wynik testu występowalności
      * @throws SQLException
      */
-    public boolean isUnique(String column, String table, String username) throws SQLException {
-        int licznik = 0;
-        String query = "SELECT "+ column + " FROM "+ table + " WHERE "+ column + " = "+ "'"+ username + "'";
-        try{
-            QueryExecutor queryExecutor = new QueryExecutor();
-            ResultSet rs = queryExecutor.executeSelect(query);
-            while (rs.next()){
-                rs.next();
-                licznik++;
-            }
-        }
-        catch(SQLException e){
-            System.out.println("Błąd z bazą danych");
-        }
-        if(licznik == 0){
-            return true;
-        }
-        return false;
 
-    }
 
     /**
      * Sprawdza poprawność warunku loginu
@@ -82,7 +67,7 @@ public class Register {
      */
     public boolean includeLoginConditions(String login) throws SQLException {
         int loginLength = login.length();
-        if(loginLength >= 8 && loginLength <=15 && isUnique("login","user_login",login)) return true;
+        if(loginLength >= 8 && loginLength <=15 && QueryExecutor.lackValue("login","user_login",login,this.socket)) return true;
         return false;
     }
 

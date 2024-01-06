@@ -1,5 +1,6 @@
 package com.conf;
 
+import java.net.ConnectException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -37,6 +38,21 @@ public class DBConnector {
         }
 
         return connection;
+    }
+
+    /**
+     * Zamyka połączenie z bazą danych
+     * @param connection połączenie z bazą danych
+     */
+    public static void disconnect(Connection connection){
+        try{
+            connection.close();
+            System.out.println("Poprawne zakończenie połączenia z bazą danych.");
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            System.out.println("Błąd zakończenia połączenia z bazą danych");
+        }
     }
 
 }
