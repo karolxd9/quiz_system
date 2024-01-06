@@ -33,9 +33,9 @@ public class HelloApplication extends Application {
         Register rejestruj = new Register("Karol","Przybycin","oskar12345","Masochista123");
         System.out.println(rejestruj.isOK());*/
         ArrayList<DBSelectServerThread>threads = new ArrayList<>();
-
         DBSelectServerThread dbServer = new DBSelectServerThread(threads);
         dbServer.main();
+
         launch();
     }
 

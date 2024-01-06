@@ -24,14 +24,14 @@ public class ClientHandler implements Callable {
 
 
     @Override
-    public ResultSet call() throws IOException, ClassNotFoundException {
-        ObjectInputStream fromServer = new ObjectInputStream(clientSocket.getInputStream());
+    public ResultSet call(){
+        ObjectInputStream fromServer;
         try{
+            fromServer = new ObjectInputStream(clientSocket.getInputStream());
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(),true);
             out.println(this.query);
             QueryExecutor queryExecutor = new QueryExecutor();
-            ResultSet resultSet = (ResultSet) fromServer.readObject();
-
+            ResultSet resultSet = queryExecutor.executeSelect(this.query);
             return resultSet;
 
         }
