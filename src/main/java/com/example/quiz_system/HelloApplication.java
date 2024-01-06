@@ -1,5 +1,6 @@
 package com.example.quiz_system;
 
+import com.conf.DBConnector;
 import com.conf.SystemInfo;
 
 /*import com.generator.UsersParallelGenerator;*/
@@ -35,6 +36,7 @@ public class HelloApplication extends Application {
         ArrayList<DBSelectServerThread>threads = new ArrayList<>();
         DBSelectServerThread dbServer = new DBSelectServerThread(threads);
         dbServer.main();
+
 
         launch();
     }

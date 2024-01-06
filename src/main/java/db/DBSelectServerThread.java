@@ -28,14 +28,19 @@ public class DBSelectServerThread {
         try (ServerSocket serverSocket = new ServerSocket(60000)) {
             while (true) {
                 Socket clientSocket = serverSocket.accept();
+                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                ObjectOutputStream out = new ObjectOutputStream(new ObjectOutputStream(clientSocket.getOutputStream()));
                 System.out.println("Połączono z klientem " + clientSocket.getInetAddress());
-
-
-                FutureTask<ResultSet> futureTask = new FutureTask<>(new ClientHandler(clientSocket, "SELECT * FROM quiz"));
+                FutureTask<ResultSet> futureTask = new FutureTask<>(new ClientHandler(clientSocket, in.readLine()));
                 this.executor.execute(futureTask);
+                out.writeObject(futureTask.get());
             }
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 }

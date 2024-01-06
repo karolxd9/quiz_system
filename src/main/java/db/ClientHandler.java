@@ -31,12 +31,13 @@ public class ClientHandler implements Callable {
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(),true);
             out.println(this.query);
             QueryExecutor queryExecutor = new QueryExecutor();
-            ResultSet resultSet = queryExecutor.executeSelect(this.query);
+            ResultSet resultSet = (ResultSet) (fromServer.readObject());
             return resultSet;
-
         }
         catch(IOException e){
             e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
 
         return null;
