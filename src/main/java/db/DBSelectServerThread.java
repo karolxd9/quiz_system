@@ -35,15 +35,19 @@ public class DBSelectServerThread {
             while (true) {
 
                 Socket clientSocket = serverSocket.accept();
+                BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                String clientQuery = in.readLine();
                 System.out.println("Połączono z klientem " + clientSocket.getInetAddress());
-                Connection dbConnection = DBConnector.connect();
-                FutureTask<Void> futureTask = new FutureTask<>(new ClientHandler(clientSocket));
+                FutureTask<Void> futureTask = new FutureTask<>(new ClientHandler(clientSocket,clientQuery));
                 this.executor.execute(futureTask);
 
             }
         }
         catch (IOException e){
             e.printStackTrace();
+        }
+        finally {
+            executor.shutdown();
         }
     }
 
