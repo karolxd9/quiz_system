@@ -32,13 +32,15 @@ public class ClientHandler implements Callable {
     @Override
     public ResultSet call(){
         try(PrintWriter out = new PrintWriter(clientSocket.getOutputStream(),true);
-            BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))){
-            String inputLine;
-
-
-            QueryExecutor queryExecutor = new QueryExecutor();
-            ResultSet resultSet = queryExecutor.executeSelect(this.query);
-
+            ObjectInputStream fromServer = new ObjectInputStream(new ObjectInputStream(clientSocket.getInputStream()))){
+            out.println(this.query);
+            ResultSet resultSet = null;
+            try {
+                resultSet = (ResultSet) fromServer.readObject();
+            }
+            catch(ClassNotFoundException | NullPointerException e){
+                e.printStackTrace();
+            }
             return resultSet;
 
         }

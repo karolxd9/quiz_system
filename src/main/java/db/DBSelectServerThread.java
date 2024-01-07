@@ -1,11 +1,14 @@
 package db;
 
 import com.conf.DBConnector;
+import com.conf.GlobalSettings;
+import com.conf.QueryExecutor;
 import com.conf.SystemInfo;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -35,16 +38,19 @@ public class DBSelectServerThread {
     public void main() {
         try (ServerSocket serverSocket = new ServerSocket(6000)) {
 
-            //BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            //output = new PrintWriter(socket.getOutputStream(),true);
+            BufferedReader input = new BufferedReader(new InputStreamReader(GlobalSettings.socket.getInputStream()));
+
 
             while (true) {
 
                 Socket clientSocket = serverSocket.accept();
+                ObjectOutputStream toClient = new ObjectOutputStream(new ObjectOutputStream(clientSocket.getOutputStream()));
                 System.out.println("Połączono z klientem " + clientSocket.getInetAddress());
-                FutureTask<Void> futureTask = new FutureTask<>(new ClientHandler(clientSocket));
-                this.executor.execute(futureTask);
-
+                String query = input.readLine();
+                System.out.println(query);
+                QueryExecutor executor1 = new QueryExecutor();
+                ResultSet result = (ResultSet) executor1.executeSelect(query);
+                toClient.writeObject((Object) result);
             }
         }
         catch (IOException e){
