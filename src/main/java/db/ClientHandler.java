@@ -19,7 +19,7 @@ public class ClientHandler implements Callable {
     public ClientHandler(Socket clientSocket){
         this.clientSocket = clientSocket;
     }
-    public synchronized String addQuery(String query){
+    public String addQuery(String query){
         this.query = query;
         return query;
     }
@@ -31,16 +31,10 @@ public class ClientHandler implements Callable {
      */
     @Override
     public ResultSet call(){
-        try(PrintWriter out = new PrintWriter(clientSocket.getOutputStream(),true);
-            ObjectInputStream fromServer = new ObjectInputStream(new ObjectInputStream(clientSocket.getInputStream()))){
-            out.println(this.query);
-            ResultSet resultSet = null;
-            try {
-                resultSet = (ResultSet) fromServer.readObject();
-            }
-            catch(ClassNotFoundException | NullPointerException e){
-                e.printStackTrace();
-            }
+        try(PrintWriter out = new PrintWriter(clientSocket.getOutputStream(),true)){
+            QueryExecutor queryExecutor = new QueryExecutor();
+            ResultSet resultSet = queryExecutor.executeSelect(this.query);
+
             return resultSet;
 
         }
