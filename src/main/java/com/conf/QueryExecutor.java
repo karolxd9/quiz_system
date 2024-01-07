@@ -16,6 +16,14 @@ import java.util.concurrent.FutureTask;
  * Klasa umożliwiająca wykonywanie zapytań
  */
 public class QueryExecutor {
+    public Connection connection;
+    public QueryExecutor(){
+        Connection connection = DBConnector.connect();
+    }
+
+    public Connection getConnection() {
+        return connection;
+    }
 
     /**
      * Wykonywanie selekcji(zapytań SELECT)
@@ -24,7 +32,6 @@ public class QueryExecutor {
      */
     public ResultSet executeSelect(String selectQuery) throws RuntimeException{
         try {
-            Connection connection = DBConnector.connect();
             Statement statemant = connection.createStatement();
             return statemant.executeQuery(selectQuery);
         }
@@ -39,7 +46,6 @@ public class QueryExecutor {
      */
     public void executeQuery(String query) throws RuntimeException{
         try{
-            Connection connection = DBConnector.connect();
             Statement statemant = connection.createStatement();
             statemant.execute(query);
         }
