@@ -37,8 +37,6 @@ public class HelloApplication extends Application {
         ArrayList<DBSelectServerThread>threads = new ArrayList<>();
         DBSelectServerThread dbServer = new DBSelectServerThread(threads);
         dbServer.main();
-
-
         launch();
     }
 

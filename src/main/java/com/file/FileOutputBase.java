@@ -11,7 +11,7 @@ import java.util.ArrayList;
 /**
  * Klasa ogólna za pomocą, która pomoże w generacji i tworzeniu pliku o danym rozszerzeniu
  */
-public class FileOutputBase {
+public class FileOutputBase implements Runnable{
 
     private String name; //nazwa pliku
     private String path; //nazwa ścieżki, gdzie zapisać plik
@@ -67,10 +67,8 @@ public class FileOutputBase {
         return answers;
     }
 
-    public void createFile(){
-        ;
-
+    @Override
+    public void run() {
+        
     }
-
-
 }
