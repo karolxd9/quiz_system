@@ -1,26 +1,35 @@
 package com.auth;
 
+import com.conf.GlobalSettings;
 import com.conf.QueryExecutor;
+import db.DMLHandler;
 
 import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Locale;
+import java.util.ArrayList;
+
 
 public class Register {
     private String first_name;
     private String second_name;
+
+    private String last_name;
     private String login;
     private String password;
 
     private Socket socket;
 
-    public Register(String first_name,String second_name, String login, String password,Socket socket){
+    private ArrayList<String>listOfQueries;
+
+    public Register(String first_name,String second_name,String last_name,String login, String password,Socket socket){
         this.first_name = first_name;
         this.second_name = second_name;
+        this.last_name = last_name;
         this.login = login;
         this.password = password;
         this.socket = socket;
+        this.listOfQueries = new ArrayList<>();
     }
 
     /**
@@ -114,6 +123,22 @@ public class Register {
         }
 
         return (passState && loginState && firstNameState && secondNameState && surnameState);
+    }
+    public void register() throws SQLException{
+        if(isOK()) {
+            try {
+                QueryExecutor queryExecutor = new QueryExecutor();
+                ResultSet maxIDResult = queryExecutor.executeSelect("SELECT * FROM user ORDER BY user_login");
+                int newUserID = maxIDResult.getInt("user_id") + 1;
+                this.listOfQueries.add("INSERT INTO INSERT INTO `user`(`first_name`, `second_name`, `last_name`) VALUES (" + "'" + this.first_name + "','" + this.second_name + "','" + this.last_name + "')");
+                this.listOfQueries.add("INSERT INTO user_login VALUES (" + "'" + newUserID + "','" + this.login + "','" + SHA256Hashing.hashStringToSHA256(this.password) + "')");
+                DMLHandler dmlHandler = new DMLHandler(GlobalSettings.socket,this.listOfQueries);
+                dmlHandler.run();
+
+            }catch (SQLException e){
+                e.printStackTrace();
+            }
+        }
     }
 
 }

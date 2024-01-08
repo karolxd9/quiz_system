@@ -14,30 +14,34 @@ import java.util.concurrent.FutureTask;
 //serwer do współbieżnej obsługi zapytań selekcji bazy danych
 public class DBSelectServerThread {
     private Socket socket;
-    private ArrayList<DBSelectServerThread>threadList;
+
     private int port;
     private String query;
 
     private int howManyThread;
     private PrintWriter output;
     ExecutorService executor;
-    public DBSelectServerThread(ArrayList<DBSelectServerThread>threadList){
-        SystemInfo info = new SystemInfo();
-        this.threadList = threadList;
-        int howManyThread = info.getNumberOfCore();
-        this.executor = Executors.newFixedThreadPool(howManyThread);
+    public DBSelectServerThread(){
+        this.port = 6000;
+    }
 
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public int getPort() {
+        return port;
     }
 
     /**
      * Świadczy usługę dostarczania zasobów z zapytania
      */
     public void main() {
-        try (ServerSocket serverSocket = new ServerSocket(6000)) {
-
-            while (true){
+        try (ServerSocket serverSocket = new ServerSocket(this.getPort())) {
+            while(true){
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("Połączono z klientem " + clientSocket.getInetAddress());
+                clientSocket.close();
             }
         }
         catch (IOException e){

@@ -11,11 +11,12 @@ public class GlobalSettings {
     public static ExecutorService exec;
 
     public static Socket socket;
+    public static Socket socket2;
 
     static {
         exec = Executors.newFixedThreadPool(info.getNumberOfCore());
         try {
-            socket = new Socket("192.168.144.207", 6000);
+            socket = new Socket("192.168.1.100", 7000);
         }
         catch(UnknownHostException e){
             e.printStackTrace();

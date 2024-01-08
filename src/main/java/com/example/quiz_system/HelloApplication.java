@@ -34,8 +34,8 @@ public class HelloApplication extends Application {
         Register rejestruj = new Register("Karol","Przybycin","oskar12345","Masochista123");
         System.out.println(rejestruj.isOK());*/
        // Socket socket = new Socket("192.168.0.103",6000);
-        ArrayList<DBSelectServerThread>threads = new ArrayList<>();
-        DBSelectServerThread dbServer = new DBSelectServerThread(threads);
+        DBSelectServerThread dbServer = new DBSelectServerThread();
+        dbServer.setPort(7000);
         dbServer.main();
         launch();
     }

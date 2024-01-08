@@ -1,11 +1,11 @@
-package com.file;
+package com.Quiz;
 
-public class OptionFormat {
+public class Option {
 
     private int quiz_id;
     private String content;
 
-    public OptionFormat(int quiz_id,String content){
+    public Option(int quiz_id,String content){
         this.quiz_id = quiz_id;
         this.content = content;
     }

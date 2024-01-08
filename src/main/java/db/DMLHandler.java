@@ -5,9 +5,9 @@ import com.conf.QueryExecutor;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.Iterator;
-import java.util.List; // Poprawione: Użyj interfejsu List zamiast ArrayList
+import java.util.List;
 
-// Poprawione: Zmiana nazwy klasy na bardziej ogólną, zgodną z konwencją Java
+
 public class DMLHandler implements Runnable {
     private final Socket clientSocket;
     private final List<String> query; // Poprawione: Użyj interfejsu List zamiast konkretnego typu (ArrayList)
