@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Task {
+    private int quizID;
     private String header;
     private String name;
     private String content;
@@ -14,7 +15,8 @@ public class Task {
     private int maxPoint;
     private Level level;
 
-    public Task(String header,String name,String content,int maxPoint){
+    public Task(int quizID,String header,String name,String content,int maxPoint){
+        this.quizID = quizID;
         this.header = header;
         this.name = name;
         this.content = content;
@@ -50,6 +52,26 @@ public class Task {
 
     public Type getType(){
         return this.type;
+    }
+
+    public int getQuizID() {
+        return quizID;
+    }
+
+    public void addTaskToDB(){
+        String query = "INSERT INTO task(quiz_id,'name','type','header','contant','max_points','level') VALUES(";
+        String quizIDquery = this.getQuizID() + ",";
+        String nameQuery = "'"+this.name+"',";
+        String typeString = this.type.typeOfTask(this.getType());
+        String typeQuery = "'"+typeString+"',";
+        String headerQuery = "'"+this.getHeader()+"',";
+        String contentQuery = "'"+this.getContent()+"',";
+        String levelString = this.getLevel().levelOfTask(this.getLevel());
+        String levelQuery = "'"+levelString+"')";
+        query = query + quizIDquery + nameQuery + typeQuery + headerQuery + contentQuery + levelQuery;
+        ArrayList<String>list = new ArrayList<>();
+        list.add(query);
+        DMLHandler dmlHandler = new DMLHandler(GlobalSettings.socket,list);
     }
 
 }

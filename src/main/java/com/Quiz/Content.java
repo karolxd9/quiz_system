@@ -23,7 +23,7 @@ public class Content {
                 String header = tasks.getString("header");
                 String content = tasks.getString("contant");
                 int max_point = tasks.getInt("max_points");
-                quiz = new Task(header,name,content,max_point);
+                quiz = new Task(QuizID,header,name,content,max_point);
                 results.add(quiz);
             }
         }catch(NullPointerException | SQLException e){
