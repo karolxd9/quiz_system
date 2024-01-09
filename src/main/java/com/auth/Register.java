@@ -32,6 +32,10 @@ public class Register {
         this.listOfQueries = new ArrayList<>();
     }
 
+    public String getLogin() {
+        return login;
+    }
+
     /**
      * Sprawdza warunki bezpieczeństwa hasła
      * @param password hasło, które wprowadza użytkownik podczas rejestracji

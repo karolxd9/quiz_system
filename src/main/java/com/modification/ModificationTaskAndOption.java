@@ -133,7 +133,9 @@ public class ModificationTaskAndOption {
      * @param isCorrect stan poprawności odpowiedzi
      */
     public void changeCorrection(int option_id, boolean isCorrect){
-        String query = "UPDATE option SET isCorrect = "+isCorrect+" WHERE option_id = "+option_id;
+        int isCorrectNumber = 0;
+        if(isCorrect) isCorrectNumber = 1;
+        String query = "UPDATE option SET isCorrect = "+ isCorrectNumber +" WHERE option_id = "+option_id;
         ArrayList<String>list = new ArrayList<>();
         list.add(query);
         this.modificationHandler = new DMLHandler(GlobalSettings.socket,list);

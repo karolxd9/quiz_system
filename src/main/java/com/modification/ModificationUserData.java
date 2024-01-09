@@ -71,17 +71,17 @@ public class ModificationUserData {
     /**
      * Zmiana drugiego imienia
      * @param userID identyfikator użytkownika
-     * @param name potencjalne drugie imię(przechodzi weryfikację)
+     * @param name potencjalne drugie imię
      * @throws SQLException
      */
     public void changeSecondName(int userID,String name) throws SQLException{
-        if(Register.includeNameConditions(name)) {
+
             ArrayList<String> list = new ArrayList<>();
             String query = "UPDATE user SET second_name=" + "'" + name + "'" + " WHERE user_id = " + userID;
             list.add(query);
             this.modificationHandler = new DMLHandler(GlobalSettings.socket, list);
             this.modificationHandler.run();
-        }
+
     }
 
     /**

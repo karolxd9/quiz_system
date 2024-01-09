@@ -1,9 +1,17 @@
 package com.example.quiz_system;
 
+import com.auth.Auth;
+import com.auth.Register;
+import com.conf.GlobalSettings;
+import com.conf.QueryExecutor;
 import com.conf.SystemInfo;
 
 /*import com.generator.UsersParallelGenerator;*/
 import com.db.DBSelectServerThread;
+import com.modification.ModificationUserData;
+import com.quiz.Option;
+import com.quiz.Task;
+import com.quiz.Type;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class HelloApplication extends Application {
@@ -35,6 +44,30 @@ public class HelloApplication extends Application {
         dbServer.setPort(7000);
         dbServer.main();
         launch();
+
+
+        Register newUser = new Register("Adam","","Głaz","adamxd69","Malutenki69", GlobalSettings.socket);
+        QueryExecutor queryExecutor = new QueryExecutor();
+        ResultSet r1 = queryExecutor.executeSelect("SELECT * FROM WHERE login = '"+newUser.getLogin()+"'");
+        int userID = r1.getInt("user_id");
+        ModificationUserData userDataMod = new ModificationUserData();
+        userDataMod.changeLogin(userID,"karolpxd69");
+        userDataMod.changeFirstName(userID,"Karol");
+        userDataMod.changeSurname(userID,"Przybycin");
+        userDataMod.changePassword(userID,"Malutenki69","Malutenki10+59");
+
+        Auth wynikLogowania = new Auth();
+        System.out.println(wynikLogowania.login1step("karolpxd69","Malutenki10+59",GlobalSettings.socket));
+
+        Task newTask = new Task(15001,"Klasa anonimowa","Co to klasa anonimowa","Wyjaśnij co to klasa anonimowa",10);
+        newTask.addType(Type.OPENED);
+
+        Option additionalOption = new Option(15002,"silniową");
+        additionalOption.addCorretion(false);
+        additionalOption.addOptionToDB();
+
+
+
     }
 
 }

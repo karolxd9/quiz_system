@@ -16,6 +16,9 @@ public class Option {
         this.quiz_id = quiz_id;
         this.content = content;
     }
+    public void addCorretion(boolean isCorrect){
+        this.isCorrect = isCorrect;
+    }
 
 
     public int getQuiz_id() {
