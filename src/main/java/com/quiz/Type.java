@@ -1,4 +1,4 @@
-package com.Quiz;
+package com.quiz;
 
 public enum Type {
     OPENED,

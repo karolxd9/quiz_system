@@ -1,13 +1,10 @@
-package db;
+package com.db;
 
 import com.conf.QueryExecutor;
-import javafx.scene.shape.StrokeLineCap;
 
 import java.io.*;
 import java.net.Socket;
-import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.concurrent.Callable;
 
 //klasa wspomagająca współbieżne odpytywanie serwera o wynik zapytania selekcji

@@ -1,7 +1,7 @@
-package com.Quiz;
+package com.quiz;
 
 import com.conf.GlobalSettings;
-import db.DMLHandler;
+import com.db.DMLHandler;
 
 import java.util.ArrayList;
 

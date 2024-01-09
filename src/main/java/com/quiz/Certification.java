@@ -1,7 +1,7 @@
-package com.Quiz;
+package com.quiz;
 
 import com.conf.GlobalSettings;
-import db.DMLHandler;
+import com.db.DMLHandler;
 
 import java.util.ArrayList;
 
@@ -26,7 +26,7 @@ public class Certification {
         String query = "INSERT INTO certefication('min_points,name') VALUES("+this.getMinPoints()+","+"'"+this.getName()+"')";
         ArrayList<String>list = new ArrayList<>();
         list.add(query);
-        DMLHandler dmlHandler = new DMLHandler(GlobalSettings.socket,query);
+        DMLHandler dmlHandler = new DMLHandler(GlobalSettings.socket,list);
         dmlHandler.run();
     }
 

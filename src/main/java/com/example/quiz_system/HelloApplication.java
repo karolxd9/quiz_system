@@ -1,20 +1,17 @@
 package com.example.quiz_system;
 
-import com.conf.DBConnector;
 import com.conf.SystemInfo;
 
 /*import com.generator.UsersParallelGenerator;*/
-import db.DBSelectServerThread;
+import com.db.DBSelectServerThread;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.Socket;
 import java.net.UnknownHostException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class HelloApplication extends Application {
     @Override

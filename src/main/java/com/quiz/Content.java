@@ -1,4 +1,4 @@
-package com.Quiz;
+package com.quiz;
 
 import com.conf.GlobalSettings;
 import com.conf.QueryExecutor;

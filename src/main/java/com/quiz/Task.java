@@ -1,10 +1,9 @@
-package com.Quiz;
+package com.quiz;
 
 import com.conf.GlobalSettings;
-import db.DMLHandler;
+import com.db.DMLHandler;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Task {
     private int quizID;

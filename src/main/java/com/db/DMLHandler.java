@@ -1,4 +1,4 @@
-package db;
+package com.db;
 
 import com.conf.QueryExecutor;
 

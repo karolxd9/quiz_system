@@ -2,7 +2,7 @@ package com.auth;
 
 import com.conf.GlobalSettings;
 import com.conf.QueryExecutor;
-import db.DMLHandler;
+import com.db.DMLHandler;
 
 import java.net.Socket;
 import java.sql.ResultSet;
@@ -37,7 +37,7 @@ public class Register {
      * @param password hasło, które wprowadza użytkownik podczas rejestracji
      * @return wynik weryfikacji proponowanego hasła
      */
-    public boolean includePasswordConditions(String password){
+    public static boolean includePasswordConditions(String password){
         boolean lengthTest = false;
         boolean bigCharacterTest = false;
         boolean specialCharTest = false;
@@ -74,9 +74,9 @@ public class Register {
      * @param login proponowany login
      * @return wynik testu poprawności loginu
      */
-    public boolean includeLoginConditions(String login) throws SQLException {
+    public static boolean includeLoginConditions(String login) throws SQLException {
         int loginLength = login.length();
-        if(loginLength >= 8 && loginLength <=15 && QueryExecutor.lackValue("login","user_login",login,this.socket)) return true;
+        if(loginLength >= 8 && loginLength <=15 && QueryExecutor.lackValue("login","user_login",login,GlobalSettings.socket)) return true;
         return false;
     }
 

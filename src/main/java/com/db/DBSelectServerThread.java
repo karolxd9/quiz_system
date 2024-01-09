@@ -1,15 +1,9 @@
-package db;
-
-import com.conf.DBConnector;
-import com.conf.SystemInfo;
+package com.db;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.FutureTask;
 
 //serwer do współbieżnej obsługi zapytań selekcji bazy danych
 public class DBSelectServerThread {

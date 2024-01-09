@@ -1,6 +1,6 @@
 package com.conf;
 
-import db.ClientHandler;
+import com.db.ClientHandler;
 
 import java.net.Socket;
 import java.sql.Connection;
@@ -8,8 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 
 /**
