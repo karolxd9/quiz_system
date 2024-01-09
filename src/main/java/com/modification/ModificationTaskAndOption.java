@@ -2,6 +2,7 @@ package com.modification;
 
 import com.conf.GlobalSettings;
 import com.db.DMLHandler;
+import com.quiz.Type;
 
 import java.util.ArrayList;
 
@@ -59,6 +60,86 @@ public class ModificationTaskAndOption {
         this.modificationHandler = new DMLHandler(GlobalSettings.socket,list);
         this.modificationHandler.run();
     }
+
+    /**
+     * Zmiana typu zadania
+     * @param task_id identyfikator zadania
+     * @param type typ zadania
+     */
+    public void changeType(int task_id, Type type){
+        String typeString = type.typeOfTask(type);
+        ArrayList<String>list = new ArrayList<>();
+        String query = "UPDATE task SET type = '"+typeString+"' WHERE task_id = "+task_id;
+        list.add(query);
+        this.modificationHandler = new DMLHandler(GlobalSettings.socket,list);
+        this.modificationHandler.run();
+    }
+
+    /**
+     * Zmiana nagłówka zadania
+     * @param taskID identyfikator zadania
+     * @param header tekst nagłówka
+     */
+    public void changeHeader(int taskID,String header){
+        String query = "UPDATE task SET header = '"+header+"' WHERE task_id = "+taskID;
+        ArrayList<String>list = new ArrayList<>();
+        list.add(query);
+        this.modificationHandler = new DMLHandler(GlobalSettings.socket,list);
+        this.modificationHandler.run();
+    }
+
+    /**
+     * Zmiana treści zadania
+     * @param taskID identyfikator zadania
+     * @param content treść zadania
+     */
+    public void changeContent(int taskID,String content){
+        String query = "UPDATE task SET contant= '"+content+"' WHERE task_id = "+taskID;
+        ArrayList<String>list = new ArrayList<>();
+        list.add(query);
+        this.modificationHandler = new DMLHandler(GlobalSettings.socket,list);
+        this.modificationHandler.run();
+    }
+
+    /**
+     * Zmiana maksymalnej możliwej liczby punktów za dane zadanie
+     * @param taskID identyfikator zadania
+     * @param maxPoints maksymalna możliwa liczba punktów za dane zadanie
+     */
+    public void changeMaxPoints(int taskID,String maxPoints){
+        String query = "UPDATE task SET max_points = "+maxPoints+" WHERE task_id = "+taskID;
+        ArrayList<String>list = new ArrayList<>();
+        list.add(query);
+        this.modificationHandler = new DMLHandler(GlobalSettings.socket,list);
+        this.modificationHandler.run();
+    }
+
+    /**
+     * Zmiana przynależności zadania dla opcji wyboru
+     * @param optionID identyfikator opcji wyboru
+     * @param taskID nowy identyfikator zadania
+     */
+    public void changeTaskIDForOption(int optionID,int taskID){
+        String query = "UPDATE option SET task_id = "+taskID+" WHERE option_id = "+optionID;
+        ArrayList<String>list = new ArrayList<>();
+        list.add(query);
+        this.modificationHandler = new DMLHandler(GlobalSettings.socket,list);
+        this.modificationHandler.run();
+    }
+
+    /**
+     * Zmiana poprawności odpowiedzi
+     * @param option_id identyfikator odpowiedzi
+     * @param isCorrect stan poprawności odpowiedzi
+     */
+    public void changeCorrection(int option_id, boolean isCorrect){
+        String query = "UPDATE option SET isCorrect = "+isCorrect+" WHERE option_id = "+option_id;
+        ArrayList<String>list = new ArrayList<>();
+        list.add(query);
+        this.modificationHandler = new DMLHandler(GlobalSettings.socket,list);
+        this.modificationHandler.run();
+    }
+
 
 
 }
