@@ -87,7 +87,7 @@ public class Register {
      * @param name imię podane przez użytkownika
      * @return sprawdzenie poprawności imienia
      */
-    public boolean includeNameConditions(String name){
+    public static boolean includeNameConditions(String name){
         String nameStatrsWithUpperCase = name.replace("\\s","");
         int len = nameStatrsWithUpperCase.length();
         if(len == 0) return false; //Czy imię nie jest puste
