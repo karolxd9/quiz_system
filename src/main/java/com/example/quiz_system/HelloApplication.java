@@ -8,7 +8,9 @@ import com.conf.SystemInfo;
 
 /*import com.generator.UsersParallelGenerator;*/
 import com.db.DBSelectServerThread;
+import com.modification.ModificationTaskAndOption;
 import com.modification.ModificationUserData;
+import com.quiz.Level;
 import com.quiz.Option;
 import com.quiz.Task;
 import com.quiz.Type;
@@ -39,35 +41,26 @@ public class HelloApplication extends Application {
         logowanie.login1step("oskareczek","koteczek");
         Register rejestruj = new Register("Karol","Przybycin","oskar12345","Masochista123");
         System.out.println(rejestruj.isOK());*/
-       // Socket socket = new Socket("192.168.0.103",6000);
-        DBSelectServerThread dbServer = new DBSelectServerThread();
-        dbServer.setPort(7000);
-        dbServer.main();
-        launch();
+        // Socket socket = new Socket("192.168.0.103",6000);
 
 
-        Register newUser = new Register("Adam","","Głaz","adamxd69","Malutenki69", GlobalSettings.socket);
-        QueryExecutor queryExecutor = new QueryExecutor();
-        ResultSet r1 = queryExecutor.executeSelect("SELECT * FROM WHERE login = '"+newUser.getLogin()+"'");
-        int userID = r1.getInt("user_id");
-        ModificationUserData userDataMod = new ModificationUserData();
-        userDataMod.changeLogin(userID,"karolpxd69");
-        userDataMod.changeFirstName(userID,"Karol");
-        userDataMod.changeSurname(userID,"Przybycin");
-        userDataMod.changePassword(userID,"Malutenki69","Malutenki10+59");
+        /*Register newUser = new Register("Maria","","Głaz","MARIADB","Malut?enki69", GlobalSettings.socket);
+        newUser.register();*/
+        /*Auth firstLoging = new Auth();
+        System.out.println(firstLoging.login1step("MARIADB","Malut?enki69",GlobalSettings.socket));
+*/
+        /*Task task = new Task(15002,"test_header","tester_name","tester_content",69);
+        task.addType(Type.CLOSED);
+        task.addLevel(Level.HARD);
+        task.addTaskToDB();*/
 
-        Auth wynikLogowania = new Auth();
-        System.out.println(wynikLogowania.login1step("karolpxd69","Malutenki10+59",GlobalSettings.socket));
+        /*Option option = new Option(15002,"kot");
+        option.addCorretion(true);
+        option.addTaskID(13);
+        option.addOptionToDB();*/
 
-        Task newTask = new Task(15001,"Klasa anonimowa","Co to klasa anonimowa","Wyjaśnij co to klasa anonimowa",10);
-        newTask.addType(Type.OPENED);
-
-        Option additionalOption = new Option(15002,"silniową");
-        additionalOption.addCorretion(false);
-        additionalOption.addOptionToDB();
-
-
-
+        ModificationUserData user = new ModificationUserData();
+        user.changeFirstName();
     }
 
 }

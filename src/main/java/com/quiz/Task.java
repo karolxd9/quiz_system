@@ -57,20 +57,23 @@ public class Task {
         return quizID;
     }
 
-    public void addTaskToDB(){
-        String query = "INSERT INTO task(quiz_id,'name','type','header','contant','max_points','level') VALUES(";
-        String quizIDquery = this.getQuizID() + ",";
-        String nameQuery = "'"+this.name+"',";
+    public void addTaskToDB() {
+        String query = "INSERT INTO task (quiz_id, name, type, header, contant, max_points, level) VALUES (";
+        String quizIDquery = this.getQuizID() + ","; //1
+        String nameQuery = "'" + this.name + "',"; //2
         String typeString = this.type.typeOfTask(this.getType());
-        String typeQuery = "'"+typeString+"',";
-        String headerQuery = "'"+this.getHeader()+"',";
-        String contentQuery = "'"+this.getContent()+"',";
+        String typeQuery = "'" + typeString + "',"; //3
+        String headerQuery = "'" + this.getHeader() + "',"; //4
+        String contentQuery = "'" + this.getContent() + "',"; //5
+
         String levelString = this.getLevel().levelOfTask(this.getLevel());
-        String levelQuery = "'"+levelString+"')";
-        query = query + quizIDquery + nameQuery + typeQuery + headerQuery + contentQuery + levelQuery;
-        ArrayList<String>list = new ArrayList<>();
+        String levelQuery = "'" + levelString + "')";//6
+        query = query + quizIDquery + nameQuery + typeQuery + headerQuery+ contentQuery + this.getMaxPoint()+"," + levelQuery;
+        System.out.println(query);
+        ArrayList<String> list = new ArrayList<>();
         list.add(query);
-        DMLHandler dmlHandler = new DMLHandler(GlobalSettings.socket,list);
+        DMLHandler dmlHandler = new DMLHandler(GlobalSettings.socket, list);
+        dmlHandler.run();
     }
 
 }

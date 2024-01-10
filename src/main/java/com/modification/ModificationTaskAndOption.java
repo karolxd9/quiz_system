@@ -7,7 +7,7 @@ import com.quiz.Type;
 import java.util.ArrayList;
 
 public class ModificationTaskAndOption {
-    private DMLHandler modificationHandler; //Obsługa DML
+
 
     /**
      * Usunięcie odpowiedzi
@@ -17,8 +17,8 @@ public class ModificationTaskAndOption {
         ArrayList<String> list = new ArrayList<>();
         String query = "DELETE FROM option WHERE option_id = "+optionID;
         list.add(query);
-        this.modificationHandler = new DMLHandler(GlobalSettings.socket,list);
-        this.modificationHandler.run();
+        DMLHandler handler = new DMLHandler(GlobalSettings.socket,list);
+        handler.run();
     }
 
     /**
@@ -31,8 +31,8 @@ public class ModificationTaskAndOption {
         String queryTask = "DELETE FROM task WHERE task_id = "+task_id;
         list.add(queryOption);
         list.add(queryTask);
-        this.modificationHandler = new DMLHandler(GlobalSettings.socket,list);
-        this.modificationHandler.run();
+        DMLHandler handler = new DMLHandler(GlobalSettings.socket,list);
+        handler.run();
     }
 
     /**
@@ -44,8 +44,8 @@ public class ModificationTaskAndOption {
         ArrayList<String>list = new ArrayList<>();
         String query = "UPDATE task quiz_id = "+quizID+" WHERE taskID = "+taskID;
         list.add(query);
-        this.modificationHandler = new DMLHandler(GlobalSettings.socket,list);
-        this.modificationHandler.run();
+        DMLHandler handler = new DMLHandler(GlobalSettings.socket,list);
+        handler.run();
     }
 
     /**
@@ -57,8 +57,8 @@ public class ModificationTaskAndOption {
         ArrayList<String>list = new ArrayList<>();
         String query = "UPDATE task SET name = "+"'"+taskName+"' WHERE task_id = "+task_id;
         list.add(query);
-        this.modificationHandler = new DMLHandler(GlobalSettings.socket,list);
-        this.modificationHandler.run();
+        DMLHandler handler = new DMLHandler(GlobalSettings.socket,list);
+        handler.run();
     }
 
     /**
@@ -71,8 +71,8 @@ public class ModificationTaskAndOption {
         ArrayList<String>list = new ArrayList<>();
         String query = "UPDATE task SET type = '"+typeString+"' WHERE task_id = "+task_id;
         list.add(query);
-        this.modificationHandler = new DMLHandler(GlobalSettings.socket,list);
-        this.modificationHandler.run();
+        DMLHandler handler = new DMLHandler(GlobalSettings.socket,list);
+        handler.run();
     }
 
     /**
@@ -84,8 +84,8 @@ public class ModificationTaskAndOption {
         String query = "UPDATE task SET header = '"+header+"' WHERE task_id = "+taskID;
         ArrayList<String>list = new ArrayList<>();
         list.add(query);
-        this.modificationHandler = new DMLHandler(GlobalSettings.socket,list);
-        this.modificationHandler.run();
+        DMLHandler handler = new DMLHandler(GlobalSettings.socket,list);
+        handler.run();
     }
 
     /**
@@ -97,8 +97,8 @@ public class ModificationTaskAndOption {
         String query = "UPDATE task SET contant= '"+content+"' WHERE task_id = "+taskID;
         ArrayList<String>list = new ArrayList<>();
         list.add(query);
-        this.modificationHandler = new DMLHandler(GlobalSettings.socket,list);
-        this.modificationHandler.run();
+        DMLHandler handler = new DMLHandler(GlobalSettings.socket,list);
+        handler.run();
     }
 
     /**
@@ -110,8 +110,8 @@ public class ModificationTaskAndOption {
         String query = "UPDATE task SET max_points = "+maxPoints+" WHERE task_id = "+taskID;
         ArrayList<String>list = new ArrayList<>();
         list.add(query);
-        this.modificationHandler = new DMLHandler(GlobalSettings.socket,list);
-        this.modificationHandler.run();
+        DMLHandler handler = new DMLHandler(GlobalSettings.socket,list);
+        handler.run();
     }
 
     /**
@@ -123,8 +123,8 @@ public class ModificationTaskAndOption {
         String query = "UPDATE option SET task_id = "+taskID+" WHERE option_id = "+optionID;
         ArrayList<String>list = new ArrayList<>();
         list.add(query);
-        this.modificationHandler = new DMLHandler(GlobalSettings.socket,list);
-        this.modificationHandler.run();
+        DMLHandler handler = new DMLHandler(GlobalSettings.socket,list);
+        handler.run();
     }
 
     /**
@@ -138,8 +138,8 @@ public class ModificationTaskAndOption {
         String query = "UPDATE option SET isCorrect = "+ isCorrectNumber +" WHERE option_id = "+option_id;
         ArrayList<String>list = new ArrayList<>();
         list.add(query);
-        this.modificationHandler = new DMLHandler(GlobalSettings.socket,list);
-        this.modificationHandler.run();
+        DMLHandler handler = new DMLHandler(GlobalSettings.socket,list);
+        handler.run();
     }
 
 

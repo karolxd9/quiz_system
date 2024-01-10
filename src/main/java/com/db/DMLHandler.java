@@ -28,8 +28,9 @@ public class DMLHandler implements Runnable {
             queryIterator = this.query.iterator();
 
             while (queryIterator.hasNext()) { // Poprawione: Użyj hasNext() zamiast for-eacha z next()
-                String currentQuery = queryIterator.next(); // Poprawione: Wydobądź aktualne zapytanie przed wywołaniem executeSelect
-                queryExecutor.executeSelect(currentQuery);
+                String currentQuery = queryIterator.next();// Poprawione: Wydobądź aktualne zapytanie przed wywołaniem executeSelect
+                System.out.println(currentQuery);
+                queryExecutor.executeQuery(currentQuery);
             }
 
             queryExecutor.getConnection().commit();

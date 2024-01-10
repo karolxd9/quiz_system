@@ -19,6 +19,9 @@ public class Option {
     public void addCorretion(boolean isCorrect){
         this.isCorrect = isCorrect;
     }
+    public void addTaskID(int id){
+        this.taskID = taskID;
+    }
 
 
     public int getQuiz_id() {
@@ -38,14 +41,16 @@ public class Option {
     }
 
     public void addOptionToDB(){
-        String query = "INSERT INTO option('task_id','quiz_id','isCorrect','content') VALUES(";
-        String taskIDQuery = "'"+this.getTaskID()+"',";
-        String quizIDQuery = "'"+this.getQuiz_id()+"',";
+        String query = "INSERT INTO option(task_id,quiz_id,isCorrect,content) VALUES(";
+        String taskIDQuery = "'"+this.taskID+"',";
+        String quizIDQuery = "'"+this.quiz_id+"',";
+        String isCorrect = (this.getIsCorrect() == true) ? "1" : "0";
         String correctionQuery = "'"+this.getIsCorrect()+"',";
         String contentQuery = "'"+this.getContent()+"')";
-        query = query + taskIDQuery + quizIDQuery + contentQuery + contentQuery;
+        query = query + taskIDQuery + quizIDQuery + isCorrect + "," + contentQuery;
         ArrayList<String>list = new ArrayList<>();
         list.add(query);
+        System.out.println(query);
         DMLHandler dmlHandler = new DMLHandler(GlobalSettings.socket,list);
         dmlHandler.run();
     }

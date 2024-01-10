@@ -126,23 +126,23 @@ public class Register {
             secondNameState = includeNameConditions(secondName);
         }
 
-        return (passState && loginState && firstNameState && secondNameState && surnameState);
+        return (loginState && firstNameState && surnameState);
     }
-    public void register() throws SQLException{
-        if(isOK()) {
-            try {
-                QueryExecutor queryExecutor = new QueryExecutor();
-                ResultSet maxIDResult = queryExecutor.executeSelect("SELECT * FROM user ORDER BY user_login");
-                int newUserID = maxIDResult.getInt("user_id") + 1;
-                this.listOfQueries.add("INSERT INTO INSERT INTO `user`(`first_name`, `second_name`, `last_name`) VALUES (" + "'" + this.first_name + "','" + this.second_name + "','" + this.last_name + "')");
-                this.listOfQueries.add("INSERT INTO user_login VALUES (" + "'" + newUserID + "','" + this.login + "','" + SHA256Hashing.hashStringToSHA256(this.password) + "')");
-                DMLHandler dmlHandler = new DMLHandler(GlobalSettings.socket,this.listOfQueries);
-                dmlHandler.run();
+    public synchronized void register() throws SQLException{
 
-            }catch (SQLException e){
-                e.printStackTrace();
-            }
-        }
+            this.listOfQueries.add("INSERT INTO user (first_name, second_name, last_name) VALUES (" + "'" + this.first_name + "','" + this.second_name + "','" + this.last_name + "')");
+            DMLHandler dmlHandler = new DMLHandler(GlobalSettings.socket,this.listOfQueries);
+            dmlHandler.run();
+            ArrayList<String>list = new ArrayList<>();
+            String query = "SELECT * FROM user ORDER BY user_id DESC";
+            ResultSet r1 = QueryExecutor.result(query,GlobalSettings.socket);
+            r1.next();
+            int userID = r1.getInt("user_id");
+            list.add("INSERT INTO user_login VALUES ("+userID+",'" + this.login + "','" + SHA256Hashing.hashStringToSHA256(this.password) + "')");
+            DMLHandler dmlHandler2 = new DMLHandler(GlobalSettings.socket,list);
+            dmlHandler2.run();
+
+
     }
 
 }
