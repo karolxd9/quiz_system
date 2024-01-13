@@ -16,6 +16,7 @@ import com.quiz.Task;
 import com.quiz.Type;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -23,16 +24,25 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class HelloApplication extends Application {
+
     @Override
-    public void start(Stage primaryStage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        primaryStage.setMaximized(true);
-        primaryStage.setTitle("Strona główna");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+    public void start(Stage stage) throws IOException{
+
+
+        try {
+            Parent root = FXMLLoader.load((getClass().getResource("/com/example/quiz_system/views/loginForm.fxml")));
+            Scene scene = new Scene(root);
+            stage.setTitle("SYSTEM QUIZÓW");
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (NullPointerException e){
+            e.printStackTrace();
+        }
+
     }
 
     public static void main(String[] args) throws SQLException, InterruptedException, UnknownHostException, IOException {
@@ -59,8 +69,7 @@ public class HelloApplication extends Application {
         option.addTaskID(13);
         option.addOptionToDB();*/
 
-        ModificationUserData user = new ModificationUserData();
-        user.changeFirstName();
+        launch(args);
     }
 
 }
