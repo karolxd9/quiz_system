@@ -1,5 +1,8 @@
 package com.goncalves.project.service;
 
+import com.auth.Auth;
+import com.auth.SHA256Hashing;
+import com.conf.GlobalSettings;
 import com.goncalves.project.dao.UserDAO;
 import com.goncalves.project.model.User;
 
@@ -26,14 +29,17 @@ public class UserService {
     }
 
 
-
-    public User loginUser(String username, String password) {
-        User user = getUserDAO().checkUser(username, password);
-        if (user != null) {
-            loggedInUser = user;
+    public boolean loginUser(String username, String password) {
+        try {
+            Auth auth = new Auth();
+            // Tutaj możesz dodać dodatkową logikę lub walidację, jeśli to konieczne
+            return auth.login1step(username, password, GlobalSettings.socket);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
-        return user;
     }
+
 
 
 

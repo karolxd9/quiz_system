@@ -18,6 +18,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -33,8 +34,9 @@ public class HelloApplication extends Application {
 
 
         try {
-            Parent root = FXMLLoader.load((getClass().getResource("/com/example/quiz_system/views/loginForm.fxml")));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/quiz_system/views/loginForm.fxml"));
             Scene scene = new Scene(root);
+
             stage.setTitle("SYSTEM QUIZÓW");
             stage.setScene(scene);
             stage.show();
@@ -54,7 +56,7 @@ public class HelloApplication extends Application {
         // Socket socket = new Socket("192.168.0.103",6000);
 
 
-        /*Register newUser = new Register("Maria","","Głaz","MARIADB","Malut?enki69", GlobalSettings.socket);
+        /*Register newUser = new Register("Maria","","Głaz","MARIADB","C", GlobalSettings.socket);
         newUser.register();*/
         /*Auth firstLoging = new Auth();
         System.out.println(firstLoging.login1step("MARIADB","Malut?enki69",GlobalSettings.socket));

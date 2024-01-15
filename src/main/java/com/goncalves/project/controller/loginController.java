@@ -1,8 +1,6 @@
 package com.goncalves.project.controller;
 
-import com.auth.Auth;
 import com.auth.SHA256Hashing;
-import com.conf.GlobalSettings;
 import com.goncalves.project.model.User;
 import com.goncalves.project.service.UserService;
 import com.goncalves.project.util.FormUtils;
@@ -95,44 +93,44 @@ public class loginController implements Initializable {
     }
 
 
-    public void login() throws IOException, SQLException {
+    public void login() throws IOException {
         alertMessage alert = new alertMessage();
 
         String password = login_selectShowPassword.isSelected() ? login_showPassword.getText() : login_password.getText();
 
         if (FormValidation.isEmpty(login_username.getText()) || FormValidation.isEmpty(password)) {
-            alert.errorMessage("Wypełnij wszytski pola");
-        } else {
-            Auth loggedUser = new Auth();
-            boolean isOK = false;
-            try {
-                isOK = loggedUser.login1step(login_username.getText(), SHA256Hashing.hashStringToSHA256(password), GlobalSettings.socket);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            if (isOK == true) {
-                alert.successMessage("Successfully Login!");
+            alert.errorMessage("Wypełnij wszystkie pola");
+            return;
+        }
 
+        boolean loggedIn = userService.loginUser(login_username.getText(), password);
+        if (loggedIn) {
+            alert.successMessage("Successfully Login!");
+
+            try {
                 // Load home form
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/views/homeForm.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quiz_system/views/homeForm.fxml"));
                 Parent mainForm = loader.load();
                 Scene mainFormScene = new Scene(mainForm);
 
                 // Get the Stage from the current scene
-                Stage window = (Stage) login_btn.getScene().getWindow();
+                Stage currentStage = (Stage) login_btn.getScene().getWindow();
 
                 // Set the scene to the stage
-                window.setScene(mainFormScene);
+                currentStage.setScene(mainFormScene);
 
                 // Display the stage
-                window.show();
-
-            } else {
-                // ELSE, THEN ERROR MESSAGE WILL APPEAR
-                alert.errorMessage("Incorrect Username/Password");
+                currentStage.show();
+            } catch (IOException e) {
+                alert.errorMessage("Wystąpił błąd podczas ładowania nowej sceny");
             }
+
+        } else {
+            // ELSE, THEN ERROR MESSAGE WILL APPEAR
+            alert.errorMessage("Incorrect Username/Password");
         }
     }
+
 
     @FXML
     public void showPassword() {

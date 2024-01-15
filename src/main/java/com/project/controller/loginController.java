@@ -99,10 +99,10 @@ public class loginController implements Initializable {
         if (FormValidation.isEmpty(login_username.getText()) || FormValidation.isEmpty(password)) {
             alert.errorMessage("Please fill all blank fields");
         } else {
-            User loggedUser = userService.loginUser(login_username.getText(), password);
+            boolean loggedUser = userService.loginUser(login_username.getText(), password);
 
-            if (loggedUser != null) {
-                alert.successMessage("Successfully Login!");
+            if (loggedUser != false) {
+                alert.successMessage("Logowanie się powiodło!");
 
                 // Load home form
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/views/homeForm.fxml"));
@@ -120,7 +120,7 @@ public class loginController implements Initializable {
 
             } else {
                 // ELSE, THEN ERROR MESSAGE WILL APPEAR
-                alert.errorMessage("Incorrect Username/Password");
+                alert.errorMessage("Niepoprawny login i/lub hasło!");
             }
         }
     }
@@ -153,17 +153,17 @@ public class loginController implements Initializable {
                 || FormValidation.isEmpty(signup_cPassword.getText())
                 || FormValidation.isComboBoxSelected(signup_selectQuestion)
                 || FormValidation.isEmpty(answer)) {
-            alert.errorMessage("All fields are necessary to be filled");
+            alert.errorMessage("Każde pole powinno być wypełnione");
         } else if (FormValidation.isPasswordMatch(password, signup_cPassword.getText())) {
-            alert.errorMessage("Password does not match");
+            alert.errorMessage("Podane hasła nie pasują do siebie");
         } else if (FormValidation.isPasswordLengthValid(password)) {
-            alert.errorMessage("Invalid Password, at least 8 characters needed");
+            alert.errorMessage("Hasło powinno mieć przynajmniej 8 znaków");
         } else {
             User newUser = new User(email, username, password, question, answer);
             boolean registerSuccess = userService.registerUser(newUser);
 
             if (registerSuccess) {
-                alert.successMessage("Registered Successfully!");
+                alert.successMessage("Rejestracja się powiodła!");
 
                 // TO CLEAR ALL FIELDS OF REGISTRATION FORM
                 FormUtils.clearTextField(signup_email);
@@ -186,7 +186,7 @@ public class loginController implements Initializable {
         if (FormValidation.isEmpty(forgot_username.getText())
                 || FormValidation.isComboBoxSelected(forgot_selectQuestion)
                 || FormValidation.isEmpty(forgot_answer.getText())) {
-            alert.errorMessage("Please fill all blank fields");
+            alert.errorMessage("Proszę wypełnić puste pola!");
         } else {
             User forgotPasswordSuccess = userService.forgotPassword(forgot_username.getText(),
                     forgot_selectQuestion.getSelectionModel().getSelectedItem(),
@@ -199,7 +199,7 @@ public class loginController implements Initializable {
                 FormUtils.hide(forgot_form);
                 FormUtils.show(changePass_form);
             } else {
-                alert.errorMessage("Incorrect information");
+                alert.errorMessage("Niepoprawna informacja");
             }
         }
     }
@@ -209,16 +209,16 @@ public class loginController implements Initializable {
         alertMessage alert = new alertMessage();
 
         if (FormValidation.isEmpty(changePass_password.getText()) || FormValidation.isEmpty(changePass_cPassword.getText())) {
-            alert.errorMessage("Please fill all blank fields");
+            alert.errorMessage("Proszę wypełnić puste pola");
         } else if (FormValidation.isPasswordMatch(changePass_password.getText(), changePass_cPassword.getText())) {
-            alert.errorMessage("Password does not match");
+            alert.errorMessage("Hasła nie pasują do siebie");
         } else if (FormValidation.isPasswordLengthValid(changePass_password.getText())) {
-            alert.errorMessage("Invalid Password, at least 8 characters needed");
+            alert.errorMessage("Hasło powinno zawierać conajmniej 8 znaków");
         } else {
             boolean changePasswordSuccess = userService.changePassword(forgot_username.getText(), changePass_password.getText());
 
             if (changePasswordSuccess) {
-                alert.successMessage("Successfully changed Password");
+                alert.successMessage("Hasło poprawnie zmienione");
 
                 // LOGIN FORM WILL APPEAR
                 FormUtils.hide(signup_form);

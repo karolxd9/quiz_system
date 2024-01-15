@@ -23,15 +23,11 @@ import java.util.ResourceBundle;
 
 public class homeController implements Initializable {
 
-    @FXML
-    private TableView<User> userTable;
-    @FXML
-    private TableColumn<User, String> usernameColumn;
-    @FXML
-    private TableColumn<User, String> emailColumn;
 
 
+    @FXML
     private UserService userService;
+    @FXML
     public Button logout_btn;
     @FXML
     private Label welcomeLabel;
@@ -44,13 +40,11 @@ public class homeController implements Initializable {
         User loggedUser = userService.getLoggedInUser();
 
         // Initialize the user table
-        usernameColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
-        emailColumn.setCellValueFactory(new PropertyValueFactory<>("email"));
+
         // Add more columns as needed
 
         // Add the logged-in user to the table
         if (loggedUser != null) {
-            userTable.getItems().add(loggedUser);
             welcomeLabel.setText("Welcome, " + loggedUser.getUsername() + "!");
         }
     }
@@ -63,7 +57,7 @@ public class homeController implements Initializable {
         userService.logout();
         // navigateToLoginForm();
         // Load main form
-        Parent loginForm = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/views/loginForm.fxml")));
+        Parent loginForm = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/resources/com/example/quiz_system/views/loginForm.fxml")));
         Scene loginFormScene = new Scene(loginForm);
 
         // Get the Stage from the current scene

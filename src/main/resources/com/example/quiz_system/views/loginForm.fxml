@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 
 <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.goncalves.project.controller.loginController">
-    <AnchorPane minHeight="1080.0" minWidth="1920.0" styleClass="white-bg" stylesheets="@../../../css/style.css" StackPane.alignment="CENTER">
+    <AnchorPane minHeight="1080.0" minWidth="1920.0" styleClass="white-bg" stylesheets="/home/karolxd9/quiz_system/src/main/resources/css/style.css" StackPane.alignment="CENTER">
         <AnchorPane fx:id="login_form" layoutX="827.0" layoutY="320.0" prefHeight="520.0" prefWidth="312.0">
             <Label layoutX="93.0" layoutY="95.0" text="Panel Logowania" textFill="#187778">
                 <font>
@@ -22,9 +22,9 @@
                 </font>
             </Label>
             <TextField fx:id="login_username" layoutX="37.0" layoutY="152.0" prefHeight="30.0" prefWidth="237.0" promptText="Nazwa użytkownika" styleClass="textfield" stylesheets="@../../../css/style.css" />
-            <PasswordField fx:id="login_password" layoutX="38.0" layoutY="197.0" prefHeight="30.0" prefWidth="237.0" promptText="Hasło" styleClass="textfield" stylesheets="@../../../css/style.css" />
+            <PasswordField fx:id="passwordInput" layoutX="38.0" layoutY="197.0" prefHeight="30.0" prefWidth="237.0" promptText="Hasło" styleClass="textfield" stylesheets="@../../../css/style.css" />
             <TextField fx:id="login_showPassword" layoutX="38.0" layoutY="197.0" prefHeight="30.0" prefWidth="237.0" promptText="Password" styleClass="textfield" stylesheets="@../../../css/style.css" visible="false" />
-            <CheckBox fx:id="login_selectShowPassword" layoutX="41.0" layoutY="234.0" mnemonicParsing="false" onAction="#showPassword" text="Pokaż hasło" />
+            <CheckBox fx:id="passwordShow" layoutX="41.0" layoutY="234.0" mnemonicParsing="false" onAction="#showPassword" text="Pokaż hasło" />
             <Button fx:id="login_btn" layoutX="38.0" layoutY="278.0" mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="237.0" styleClass="btn" stylesheets="@../../../css/style.css" text="Logowanie" />
             <Label layoutX="103.0" layoutY="428.0" text="Rejstracja Konta">
                 <font>
