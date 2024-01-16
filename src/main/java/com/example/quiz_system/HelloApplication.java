@@ -1,19 +1,9 @@
 package com.example.quiz_system;
 
-import com.auth.Auth;
-import com.auth.Register;
-import com.conf.GlobalSettings;
-import com.conf.QueryExecutor;
 import com.conf.SystemInfo;
 
 /*import com.generator.UsersParallelGenerator;*/
 import com.db.DBSelectServerThread;
-import com.modification.ModificationTaskAndOption;
-import com.modification.ModificationUserData;
-import com.quiz.Level;
-import com.quiz.Option;
-import com.quiz.Task;
-import com.quiz.Type;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,22 +12,21 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Objects;
 
 public class HelloApplication extends Application {
-
     @Override
     public void start(Stage stage) throws IOException{
 
-
         try {
-            Parent root = FXMLLoader.load((getClass().getResource("/com/example/quiz_system/views/loginForm.fxml")));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/quiz_system/views/loginForm.fxml"));
             Scene scene = new Scene(root);
+
             stage.setTitle("SYSTEM QUIZÓW");
             stage.setScene(scene);
+
             stage.show();
+
         }
         catch (NullPointerException e){
             e.printStackTrace();
@@ -45,7 +34,7 @@ public class HelloApplication extends Application {
 
     }
 
-    public static void main(String[] args) throws SQLException, InterruptedException, UnknownHostException, IOException {
+    public static void main() throws SQLException, InterruptedException, UnknownHostException, IOException {
         SystemInfo info = new SystemInfo();
         /*Auth logowanie = new Auth();
         logowanie.login1step("oskareczek","koteczek");
@@ -54,7 +43,7 @@ public class HelloApplication extends Application {
         // Socket socket = new Socket("192.168.0.103",6000);
 
 
-        /*Register newUser = new Register("Maria","","Głaz","MARIADB","Malut?enki69", GlobalSettings.socket);
+        /*Register newUser = new Register("Maria","","Głaz","MARIADB","C", GlobalSettings.socket);
         newUser.register();*/
         /*Auth firstLoging = new Auth();
         System.out.println(firstLoging.login1step("MARIADB","Malut?enki69",GlobalSettings.socket));
@@ -68,8 +57,10 @@ public class HelloApplication extends Application {
         option.addCorretion(true);
         option.addTaskID(13);
         option.addOptionToDB();*/
-
-        launch(args);
+        launch();
     }
+
+
+
 
 }

@@ -10,7 +10,7 @@ import java.util.concurrent.Callable;
 //klasa wspomagająca współbieżne odpytywanie serwera o wynik zapytania selekcji
 public class ClientHandler implements Callable {
 
-    private final Socket clientSocket;
+    private Socket clientSocket;
     private String query;
 
     public ClientHandler(Socket clientSocket){
@@ -28,7 +28,8 @@ public class ClientHandler implements Callable {
      */
     @Override
     public ResultSet call(){
-        try(PrintWriter out = new PrintWriter(clientSocket.getOutputStream(),true)){
+        try{
+            PrintWriter out = new PrintWriter(clientSocket.getOutputStream(),true);
             QueryExecutor queryExecutor = new QueryExecutor();
             ResultSet resultSet = queryExecutor.executeSelect(this.query);
 
@@ -38,6 +39,7 @@ public class ClientHandler implements Callable {
         catch(IOException e){
             e.printStackTrace();
         }
+
         return null;
     }
 }

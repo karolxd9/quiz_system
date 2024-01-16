@@ -46,11 +46,13 @@ public class QueryExecutor {
      */
     public void executeQuery(String query) throws RuntimeException {
         try {
-            Statement statement = connection.createStatement();
+            Statement statement = connection.createStatement( ResultSet.TYPE_SCROLL_INSENSITIVE,
+                    ResultSet.CONCUR_UPDATABLE);
             statement.execute(query);
         } catch (SQLException e) {
             throw new RuntimeException("Błąd zapytania: " + e.getMessage());
         }
+
     }
 
     /**
@@ -61,8 +63,13 @@ public class QueryExecutor {
      */
     public static int countRows(ResultSet queryResult) throws SQLException {
         int count = 0;
+        try{
         while (queryResult.next()) {
             count++;
+        }}
+        catch (NullPointerException e){
+            System.out.println("NullPointerException");
+            return 0;
         }
         return count;
     }
