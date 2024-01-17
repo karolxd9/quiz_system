@@ -4,7 +4,6 @@ import com.auth.Register;
 import com.auth.SHA256Hashing;
 import com.conf.GlobalSettings;
 import com.conf.QueryExecutor;
-import com.example.quiz_system.HelloApplication;
 import com.modification.ModificationUserData;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,8 +12,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -54,6 +51,14 @@ public class HomeController implements Initializable {
     private PasswordField changePassField;
     @FXML
     private BorderPane editPass;
+    @FXML
+    private BorderPane quizCreator;
+    @FXML
+    private CheckBox currentPassCheckBox;
+    @FXML
+    private CheckBox passCheckBox;
+    @FXML
+    private Button changePassButton;
     private int ID;
     private boolean loginStatus;
     private Stage newStage;
@@ -83,6 +88,18 @@ public class HomeController implements Initializable {
         System.out.println(namaAndSurname);
         this.welcomeLabel.setText("Witaj, " + namaAndSurname+" !");
     }
+
+    public void disactiveAll(){
+        this.EditData.setDisable(true);
+        this.EditData.setVisible(false);
+        this.welcomeLabel.setVisible(false);
+        this.quizCreator.setVisible(false);
+        this.quizCreator.setDisable(true);
+        this.editPass.setDisable(true);
+        this.editPass.setVisible(false);
+        this.welcomeLabel.setVisible(false);
+    }
+
     public void logout() throws IOException {
         SharedData.getInstance().setLoginStatus(false);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quiz_system/views/loginForm.fxml"));
@@ -98,30 +115,21 @@ public class HomeController implements Initializable {
     }
 
     public void showUserInfo() {
-        this.EditData.setVisible(false);
-        this.EditData.setDisable(true);
-        this.welcomeLabel.setText("Imię i nazwisko: "+this.namaAndSurname+"\n"+"Login: "+login);
+        disactiveAll();
         this.welcomeLabel.setVisible(true);
-        this.editPass.setVisible(false);
-        this.editPass.setDisable(true);
+        this.welcomeLabel.setText("Imię i nazwisko: "+this.namaAndSurname+"\n"+"Login: "+login);
     }
 
     public void changeData(){
-        this.welcomeLabel.setVisible(false);
-        this.EditData.setVisible(true);
+        disactiveAll();
         this.EditData.setDisable(false);
-        changeLoginField.setDisable(false);
-        changeLoginField.setEditable(true);
-        this.EditData.setDisable(true);
         this.EditData.setVisible(true);
-        this.editPass.setVisible(false);
-        this.editPass.setDisable(true);
+
     }
 
     public void changeLogin() throws SQLException {
         String login = changeLoginField.getText();
-        this.editPass.setVisible(false);
-        this.editPass.setDisable(true);
+
         if(login.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Puste pole");
@@ -151,8 +159,6 @@ public class HomeController implements Initializable {
 
     public void changeName(ActionEvent actionEvent) throws SQLException {
         String name = changeNameField.getText();
-        this.editPass.setVisible(false);
-        this.editPass.setDisable(true);
         if(name.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Puste pole");
@@ -215,19 +221,15 @@ public class HomeController implements Initializable {
         }
     }
 
-    public void changePass() throws SQLException {
+    public void changePass2() throws SQLException {
+        disactiveAll();
         this.editPass.setVisible(true);
         this.editPass.setDisable(false);
+
+        String currentPasswordBeforeChange = r1.getString("PASSWORD");
         String currentPassword = currentPassField.getText();
         String newPassword = changePassField.getText();
         ModificationUserData changePasswordObj = new ModificationUserData();
-        String query = "SELECT * user_login WHERE user_id = "+ID;
-        ResultSet r1 = QueryExecutor.result(query,GlobalSettings.socket);
-        try {
-            r1.next();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
         if(currentPassword.isEmpty() || newPassword.isEmpty()){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText("Puste pole");
@@ -236,8 +238,10 @@ public class HomeController implements Initializable {
             alert.show();
         }
         else {
-            if (r1.getString("PASSWORD") == SHA256Hashing.hashStringToSHA256(currentPassword) && Register.includePasswordConditions(newPassword)) {
-                changePasswordObj.changePassword(ID, currentPassword, newPassword);
+            System.out.println(currentPasswordBeforeChange);
+            System.out.println(SHA256Hashing.hashStringToSHA256(currentPassword));
+            if ((currentPasswordBeforeChange.equals(SHA256Hashing.hashStringToSHA256(currentPassword))) && Register.includePasswordConditions(newPassword) == true ) {
+                changePasswordObj.changePassword(ID,currentPassword,newPassword);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setHeaderText("Poprawna zmiana hasła");
                 alert.setTitle("Poprawna zmiana hasła");
@@ -255,9 +259,11 @@ public class HomeController implements Initializable {
 
     }
 
-    public void editPassClicked(ActionEvent actionEvent) {
+    public void editPassClicked() {
+        disactiveAll();
         this.editPass.setVisible(true);
         this.editPass.setDisable(false);
-
     }
+
+
 }

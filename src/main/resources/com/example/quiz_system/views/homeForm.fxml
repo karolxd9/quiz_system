@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -18,7 +17,7 @@
 <StackPane fx:id="anchorWindow" stylesheets="/home/karolxd9/quiz_system/src/main/resources/css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.goncalves.project.controller.HomeController">
    <children>
       <AnchorPane id="AnchorPane" prefHeight="1080.0" prefWidth="1980.0" StackPane.alignment="CENTER">
-          <Label fx:id="welcomeLabel" alignment="CENTER" layoutX="183.0" layoutY="194.0" prefHeight="540.0" prefWidth="1980.0" text="Witaj, " AnchorPane.bottomAnchor="193.0" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="182.0" AnchorPane.topAnchor="194.0">
+          <Label fx:id="welcomeLabel" alignment="CENTER" layoutX="183.0" layoutY="194.0" prefHeight="540.0" prefWidth="1980.0" text="Witaj, " AnchorPane.bottomAnchor="193.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="194.0">
               <font>
                   <Font size="40.0" />
               </font>
@@ -49,25 +48,25 @@
                </Menu>
            </menus>
          </MenuBar>
-         <BorderPane fx:id="EditData" disable="true" layoutX="183.0" layoutY="199.0" prefHeight="57.0" prefWidth="425.0" visible="false" AnchorPane.bottomAnchor="193.0" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="182.0" AnchorPane.topAnchor="194.0">
+         <BorderPane fx:id="EditData" disable="true" layoutX="183.0" layoutY="199.0" prefHeight="57.0" prefWidth="425.0" visible="false" AnchorPane.bottomAnchor="193.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="194.0">
             <top>
                <VBox prefWidth="723.0" BorderPane.alignment="CENTER">
                   <children>
                      <SplitPane dividerPositions="0.5" prefWidth="422.0">
                         <items>
-                           <TextField fx:id="changeLoginField" />
-                           <Button fx:id="changeLoginButton" mnemonicParsing="false" onAction="#changeLogin" prefHeight="26.0" prefWidth="141.0" styleClass="btn" text="Zmień login" />
+                           <TextField fx:id="changeLoginField" prefHeight="26.0" prefWidth="1620.0" />
+                           <Button fx:id="changeLoginButton" mnemonicParsing="false" onAction="#changeLogin" prefHeight="26.0" prefWidth="184.0" styleClass="btn" text="Zmień login" />
                         </items>
                      </SplitPane>
                      <SplitPane dividerPositions="0.5">
                         <items>
-                           <TextField fx:id="changeSurnameField" />
+                           <TextField fx:id="changeSurnameField" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="26.0" prefWidth="1620.0" />
                            <Button fx:id="changeSurnameButton" mnemonicParsing="false" onAction="#changeSurname" prefHeight="26.0" prefWidth="119.0" styleClass="btn" text="Zmień nazwisko" />
                         </items>
                      </SplitPane>
                      <SplitPane dividerPositions="0.5">
                         <items>
-                           <TextField fx:id="changeNameField" />
+                           <TextField fx:id="changeNameField" prefHeight="26.0" prefWidth="1620.0" />
                            <Button fx:id="changeNameButton" mnemonicParsing="false" onAction="#changeName" prefHeight="26.0" prefWidth="119.0" styleClass="btn" text="Zmień imię" />
                         </items>
                      </SplitPane>
@@ -75,27 +74,26 @@
                </VBox>
             </top>
          </BorderPane>
-         <BorderPane fx:id="editPass" disable="true" layoutY="29.0" prefHeight="540.0" prefWidth="1980.0" visible="false" AnchorPane.bottomAnchor="193.0" AnchorPane.leftAnchor="183.0" AnchorPane.rightAnchor="182.0" AnchorPane.topAnchor="194.0">
+         <BorderPane fx:id="editPass" disable="true" layoutY="29.0" prefHeight="540.0" prefWidth="1980.0" visible="false" AnchorPane.bottomAnchor="193.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="182.0" AnchorPane.topAnchor="194.0">
             <top>
                <VBox prefWidth="723.0" BorderPane.alignment="CENTER">
                   <children>
-                     <SplitPane dividerPositions="0.5">
+                     <SplitPane>
                         <items>
                            <PasswordField fx:id="currentPassField" />
-                           <CheckBox fx:id="currentPassCheckBox" mnemonicParsing="false" onAction="#showCurrentPass" text="CheckBox" />
                         </items>
                      </SplitPane>
-                     <SplitPane dividerPositions="0.5, 0.5">
+                     <SplitPane dividerPositions="0.5">
                         <items>
                            <PasswordField fx:id="changePassField" />
-                           <CheckBox fx:id="currentPassCheckBox" mnemonicParsing="false" onAction="#showPass" text="CheckBox" />
-                           <Button fx:id="changePassButton" mnemonicParsing="false" onAction="#changePass" prefHeight="26.0" prefWidth="141.0" styleClass="btn" text="Zmień login" />
+                           <Button fx:id="changePassButton" mnemonicParsing="false" onAction="#changePass2" prefHeight="26.0" prefWidth="141.0" styleClass="btn" text="Zmień hasło" />
                         </items>
                      </SplitPane>
                   </children>
                </VBox>
             </top>
          </BorderPane>
+         <BorderPane fx:id="quizCreator" layoutX="1.0" layoutY="27.0" prefHeight="936.0" prefWidth="1514.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="27.0" />
       
       </AnchorPane>
    </children>

@@ -117,7 +117,7 @@ public class Register {
         passState = includePasswordConditions(this.password);
         loginState = includeLoginConditions(this.login);
         firstNameState = includeNameConditions(this.first_name);
-        surnameState = includeNameConditions(this.second_name);
+        surnameState = includeNameConditions(this.last_name);
 
 
         String secondName = this.second_name.replaceAll("\\s","");
@@ -141,7 +141,6 @@ public class Register {
             list.add("INSERT INTO user_login VALUES ("+userID+",'" + this.login + "','" + SHA256Hashing.hashStringToSHA256(this.password) + "')");
             DMLHandler dmlHandler2 = new DMLHandler(GlobalSettings.socket,list);
             dmlHandler2.run();
-
 
     }
 
