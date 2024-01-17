@@ -16,7 +16,11 @@ public class GlobalSettings {
     static {
         exec = Executors.newFixedThreadPool(info.getNumberOfCore());
         try {
+<<<<<<< HEAD
             socket = new Socket("192.168.1.101", 7000);
+=======
+            socket = new Socket("192.168.0.101", 7000);
+>>>>>>> 9d744fc2b272191501b24c3c073a60a1e8c7a66f
         }
         catch(UnknownHostException e){
             e.printStackTrace();
