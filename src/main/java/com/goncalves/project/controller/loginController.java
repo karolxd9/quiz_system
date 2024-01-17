@@ -1,21 +1,14 @@
 package com.goncalves.project.controller;
 
-<<<<<<< HEAD
+
 import com.auth.Auth;
 import com.auth.Register;
 import com.conf.GlobalSettings;
 
 import com.conf.QueryExecutor;
 import com.example.quiz_system.HelloApplication;
-=======
-import com.auth.SHA256Hashing;
-import com.goncalves.project.model.User;
-import com.goncalves.project.service.UserService;
-import com.goncalves.project.util.FormUtils;
-import com.goncalves.project.util.FormValidation;
-import com.goncalves.project.util.alertMessage;
-import javafx.event.ActionEvent;
->>>>>>> 9d744fc2b272191501b24c3c073a60a1e8c7a66f
+
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -70,7 +63,6 @@ public class loginController implements Initializable {
     }
 
 
-<<<<<<< HEAD
     @FXML
     public void loginToSystem() throws SQLException, IOException {
         this.signupForm.setDisable(true);
@@ -88,13 +80,10 @@ public class loginController implements Initializable {
         else {
 
             Auth auth = new Auth();
-=======
+        }
+
     public void login() throws IOException {
         alertMessage alert = new alertMessage();
->>>>>>> 9d744fc2b272191501b24c3c073a60a1e8c7a66f
-
-
-<<<<<<< HEAD
             try {
                 loginStatus = auth.login1step(username, password, GlobalSettings.socket);
             } catch (SQLException e) {
@@ -109,7 +98,7 @@ public class loginController implements Initializable {
                 int currentID = idResult.getInt("user_id");
                 SharedData.getInstance().setDane(currentID);
                 SharedData.getInstance().setLoginStatus(loginStatus);
-=======
+
         if (FormValidation.isEmpty(login_username.getText()) || FormValidation.isEmpty(password)) {
             alert.errorMessage("Wypełnij wszystkie pola");
             return;
@@ -121,7 +110,6 @@ public class loginController implements Initializable {
 
             try {
                 // Load home form
->>>>>>> 9d744fc2b272191501b24c3c073a60a1e8c7a66f
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/quiz_system/views/homeForm.fxml"));
                 Parent mainForm = loader.load();
                 Scene mainFormScene = new Scene(mainForm);
