@@ -41,10 +41,9 @@ public class DBServerThread {
 
                 // Przekazanie danych do klienta
                 ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
-                while (resultSet.next()) {
-                    // Przykładowe dane, dostosuj do swoich potrzeb
-                    outputStream.writeObject(resultSet);
-                }
+
+                Result<String>wynik = new Result<>();
+                wynik.getData("first_name");
 
                 // Zamknij zasoby
                 resultSet.close();
