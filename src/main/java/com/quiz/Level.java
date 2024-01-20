@@ -1,3 +1,4 @@
+/*
 package com.quiz;
 
 public enum Level {
@@ -23,3 +24,4 @@ public enum Level {
         return  levelString;
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package com.goncalves.project.controller;
 
 import com.auth.Register;
@@ -371,3 +372,4 @@ public class HomeController implements Initializable {
 
 
 }
+*/

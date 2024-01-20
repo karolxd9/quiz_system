@@ -1,6 +1,5 @@
+/*
 package com.conf;
-
-import com.db.ClientHandler;
 
 import java.net.Socket;
 import java.sql.Connection;
@@ -10,9 +9,11 @@ import java.sql.Statement;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.FutureTask;
 
+*/
 /**
  * Klasa umożliwiająca wykonywanie zapytań
- */
+ *//*
+
 public class QueryExecutor {
     private Connection connection; // Zmienna do przechowywania połączenia
 
@@ -24,12 +25,14 @@ public class QueryExecutor {
         return connection;
     }
 
-    /**
+    */
+/**
      * Wykonywanie selekcji (zapytań SELECT)
      *
      * @param selectQuery nasze zapytanie select
      * @return wykonane zapytanie selekcji
-     */
+     *//*
+
     public ResultSet executeSelect(String selectQuery) throws RuntimeException {
         try {
             Statement statement = connection.createStatement();
@@ -39,11 +42,13 @@ public class QueryExecutor {
         }
     }
 
-    /**
+    */
+/**
      * Wykonywanie zapytań modyfikujących stan bazy danych (UPDATE, INSERT, DELETE)
      *
      * @param query zapytanie (inne niż SELECT)
-     */
+     *//*
+
     public void executeQuery(String query) throws RuntimeException {
         try {
             Statement statement = connection.createStatement( ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -55,12 +60,14 @@ public class QueryExecutor {
 
     }
 
-    /**
+    */
+/**
      * Liczy ilość wierszy po wykonaniu zapytania
      *
      * @param queryResult wynik zapytania
      * @return liczba wierszy
-     */
+     *//*
+
     public static int countRows(ResultSet queryResult) throws SQLException {
         int count = 0;
         try{
@@ -74,7 +81,8 @@ public class QueryExecutor {
         return count;
     }
 
-    /**
+    */
+/**
      * Sprawdzenie czy dana wartość występuje w kolumnie
      *
      * @param column   nazwa kolumny
@@ -83,7 +91,8 @@ public class QueryExecutor {
      * @param socket   gniazdo sieciowe do komunikacji
      * @return true, jeśli wartość nie występuje, false w przeciwnym razie
      * @throws SQLException
-     */
+     *//*
+
     public static boolean lackValue(String column, String table, String username, Socket socket) throws SQLException {
         int count = 0;
         String query = "SELECT " + column + " FROM " + table + " WHERE " + column + " = '" + username + "'";
@@ -93,26 +102,9 @@ public class QueryExecutor {
         return count == 0;
     }
 
-    /**
-     * Przetwarzanie danego zapytania selekcji za pomocą klienta
-     *
-     * @param query  zapytanie selekcji
-     * @param socket gniazdo sieciowe do komunikacji
-     * @return wynik zapytania selekcji
-     */
-    public static ResultSet result(String query, Socket socket) {
-        ClientHandler clientHandler = new ClientHandler(socket);
-        clientHandler.addQuery(query);
-        FutureTask<ResultSet> task = new FutureTask<>(clientHandler);
-        GlobalSettings.exec.execute(task);
-        ResultSet resultSet = null;
-        try {
-            resultSet = task.get();
-        } catch (InterruptedException | ExecutionException e) {
-            e.printStackTrace();
-        }
-        return resultSet;
-    }
+
+
 }
 
 
+*/

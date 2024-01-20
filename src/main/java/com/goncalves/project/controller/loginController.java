@@ -1,3 +1,4 @@
+/*
 package com.goncalves.project.controller;
 
 import com.auth.Auth;
@@ -198,3 +199,4 @@ public class loginController implements Initializable {
         this.loginAnchor.setVisible(true);
     }
 }
+*/

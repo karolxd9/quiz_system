@@ -1,3 +1,4 @@
+/*
 package com.quiz;
 
 public enum Type {
@@ -25,3 +26,4 @@ public enum Type {
         return typeString;
     }
 }
+*/

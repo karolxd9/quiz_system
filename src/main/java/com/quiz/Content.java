@@ -1,3 +1,4 @@
+/*
 package com.quiz;
 
 import com.conf.GlobalSettings;
@@ -8,11 +9,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Content {
-    /**
+    */
+/**
      * Lista zadań z quizu
      * @param QuizID numer quizu
      * @return kolekcja zadań z danego quizu
-     */
+     *//*
+
     public ArrayList<Task> getTasksToArrayList(int QuizID){
         ArrayList<Task>results = new ArrayList<>();
         Task quiz = null;
@@ -33,11 +36,13 @@ public class Content {
 
     }
 
-    /**
+    */
+/**
      * Możliwe odpowiedzi do quizu
      * @param QuizID numer quizu
      * @return kolekcja odowiedzi do danego quizu
-     */
+     *//*
+
     public ArrayList<Option>getAnswersToArrayList(int QuizID){
         ArrayList<Option>answers = new ArrayList<>();
         try {
@@ -54,3 +59,4 @@ public class Content {
         return answers;
     }
 }
+*/

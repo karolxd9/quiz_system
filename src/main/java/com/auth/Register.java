@@ -1,3 +1,4 @@
+/*
 package com.auth;
 
 import com.conf.GlobalSettings;
@@ -36,11 +37,13 @@ public class Register {
         return login;
     }
 
-    /**
+    */
+/**
      * Sprawdza warunki bezpieczeństwa hasła
      * @param password hasło, które wprowadza użytkownik podczas rejestracji
      * @return wynik weryfikacji proponowanego hasła
-     */
+     *//*
+
     public static boolean includePasswordConditions(String password){
         boolean lengthTest = false;
         boolean bigCharacterTest = false;
@@ -63,21 +66,25 @@ public class Register {
 
 
 
-    /**
+    */
+/**
      * Sprawdza występowalność wartości w kolumnie
      * @param column nazwa kolumny
      * @param table nazwa tabeli
      * @param username nazwa szukanej wartości
      * @return wynik testu występowalności
      * @throws SQLException
-     */
+     *//*
 
 
-    /**
+
+    */
+/**
      * Sprawdza poprawność warunku loginu
      * @param login proponowany login
      * @return wynik testu poprawności loginu
-     */
+     *//*
+
     public static boolean includeLoginConditions(String login) throws SQLException {
         int loginLength = login.length();
         if(loginLength >= 8 && loginLength <=15 && QueryExecutor.lackValue("login","user_login",login,GlobalSettings.socket)) return true;
@@ -86,11 +93,13 @@ public class Register {
 
 
 
-    /**
+    */
+/**
      * Sprawdza poprawność imienia(nazwisko również)
      * @param name imię podane przez użytkownika
      * @return sprawdzenie poprawności imienia
-     */
+     *//*
+
     public static boolean includeNameConditions(String name){
         String nameStatrsWithUpperCase = name.replace("\\s","");
         int len = nameStatrsWithUpperCase.length();
@@ -104,10 +113,12 @@ public class Register {
         return true;
     }
 
-    /**
+    */
+/**
      * Sprawdza czy wszytsko zostało wprowadzone poprawnie
      * @return wynik weryfikacji wprowadzonych danych
-     */
+     *//*
+
     public boolean isOK() throws SQLException {
         boolean loginState = false;
         boolean passState = false;
@@ -144,4 +155,4 @@ public class Register {
 
     }
 
-}
+}*/
