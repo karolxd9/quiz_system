@@ -14,32 +14,18 @@
 
 <StackPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.goncalves.project.controller.loginController">
     <AnchorPane minHeight="1080.0" minWidth="1920.0" styleClass="white-bg" stylesheets="/home/karolxd9/quiz_system/src/main/resources/css/style.css" StackPane.alignment="CENTER">
-<<<<<<< HEAD
         <AnchorPane fx:id="loginAnchor" layoutX="827.0" layoutY="288.0" prefHeight="520.0" prefWidth="312.0" visible="false">
             <Label layoutX="79.0" layoutY="100.0" text="Panel Logowania" textFill="#187778">
-=======
-        <AnchorPane fx:id="login_form" layoutX="827.0" layoutY="320.0" prefHeight="520.0" prefWidth="312.0">
-            <Label layoutX="93.0" layoutY="95.0" text="Panel Logowania" textFill="#187778">
->>>>>>> 9d744fc2b272191501b24c3c073a60a1e8c7a66f
                 <font>
                     <Font name="Gill Sans MT" size="20.0" />
                 </font>
             </Label>
-<<<<<<< HEAD
             <TextField fx:id="loginInput" layoutX="37.0" layoutY="152.0" prefHeight="30.0" prefWidth="237.0" promptText="Nazwa użytkownika" styleClass="textfield" />
             <PasswordField fx:id="passwordInput" layoutX="38.0" layoutY="197.0" prefHeight="30.0" prefWidth="237.0" promptText="Hasło" styleClass="textfield" />
             <TextField fx:id="login_showPassword" layoutX="38.0" layoutY="197.0" prefHeight="30.0" prefWidth="237.0" promptText="Password" styleClass="textfield" visible="false" />
             <CheckBox fx:id="passwordShow" layoutX="41.0" layoutY="234.0" mnemonicParsing="false" onAction="#showPassword" text="Pokaż hasło" />
             <Button fx:id="loginButton" layoutX="38.0" layoutY="278.0" mnemonicParsing="false" onAction="#loginToSystem" prefHeight="40.0" prefWidth="237.0" styleClass="btn" text="Logowanie" />
             <Label fx:id="registerHyperlink" layoutX="103.0" layoutY="428.0" text="Rejstracja Konta">
-=======
-            <TextField fx:id="login_username" layoutX="37.0" layoutY="152.0" prefHeight="30.0" prefWidth="237.0" promptText="Nazwa użytkownika" styleClass="textfield" stylesheets="@../../../css/style.css" />
-            <PasswordField fx:id="passwordInput" layoutX="38.0" layoutY="197.0" prefHeight="30.0" prefWidth="237.0" promptText="Hasło" styleClass="textfield" stylesheets="@../../../css/style.css" />
-            <TextField fx:id="login_showPassword" layoutX="38.0" layoutY="197.0" prefHeight="30.0" prefWidth="237.0" promptText="Password" styleClass="textfield" stylesheets="@../../../css/style.css" visible="false" />
-            <CheckBox fx:id="passwordShow" layoutX="41.0" layoutY="234.0" mnemonicParsing="false" onAction="#showPassword" text="Pokaż hasło" />
-            <Button fx:id="login_btn" layoutX="38.0" layoutY="278.0" mnemonicParsing="false" onAction="#login" prefHeight="40.0" prefWidth="237.0" styleClass="btn" stylesheets="@../../../css/style.css" text="Logowanie" />
-            <Label layoutX="103.0" layoutY="428.0" text="Rejstracja Konta">
->>>>>>> 9d744fc2b272191501b24c3c073a60a1e8c7a66f
                 <font>
                     <Font name="Gill Sans MT" size="15.0" />
                 </font>

@@ -32,9 +32,7 @@ public class ClientHandler implements Callable {
             PrintWriter out = new PrintWriter(clientSocket.getOutputStream(),true);
             QueryExecutor queryExecutor = new QueryExecutor();
             ResultSet resultSet = queryExecutor.executeSelect(this.query);
-
             return resultSet;
-
         }
         catch(IOException e){
             e.printStackTrace();

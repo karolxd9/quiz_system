@@ -72,6 +72,7 @@ public class Task {
         System.out.println(query);
         ArrayList<String> list = new ArrayList<>();
         list.add(query);
+        System.out.println(query);
         DMLHandler dmlHandler = new DMLHandler(GlobalSettings.socket, list);
         dmlHandler.run();
     }

@@ -4,7 +4,13 @@ import com.auth.Register;
 import com.auth.SHA256Hashing;
 import com.conf.GlobalSettings;
 import com.conf.QueryExecutor;
+import com.db.DMLHandler;
 import com.modification.ModificationUserData;
+import com.quiz.Level;
+import com.quiz.Task;
+import com.quiz.Type;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,6 +26,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class HomeController implements Initializable {
@@ -52,13 +59,32 @@ public class HomeController implements Initializable {
     @FXML
     private BorderPane editPass;
     @FXML
-    private BorderPane quizCreator;
-    @FXML
-    private CheckBox currentPassCheckBox;
-    @FXML
-    private CheckBox passCheckBox;
+    private BorderPane quizPane;
     @FXML
     private Button changePassButton;
+    @FXML
+    private SplitPane quizNameSplit;
+    @FXML
+    private Button nameQuizButton;
+    @FXML
+    private TextField nameQuizField;
+    @FXML
+    private MenuItem toQuizCreator;
+    @FXML
+    private BorderPane taskCreatorPane;
+    @FXML
+    private ComboBox typeComboBox;
+    @FXML
+    private ComboBox levelComboBox;
+    @FXML
+    private TextField nameTaskField;
+    @FXML
+    private Spinner maxPointsField;
+    @FXML
+    private TextArea taskArea;
+    @FXML
+    private Button submitTaskButton;
+
     private int ID;
     private boolean loginStatus;
     private Stage newStage;
@@ -86,18 +112,34 @@ public class HomeController implements Initializable {
             throw new RuntimeException(e);
         }
         System.out.println(namaAndSurname);
+        disactiveAll();
+        this.welcomeLabel.setVisible(true);
         this.welcomeLabel.setText("Witaj, " + namaAndSurname+" !");
+        ObservableList<String> options = FXCollections.observableArrayList(
+                "zamknięte",
+                "otwarte",
+                "zamknięte wielokrotnego wyboru"
+        );
+        ObservableList<String> optionsLevel = FXCollections.observableArrayList(
+                "łatwe",
+                "średnie",
+                "trudne"
+        );
+        this.typeComboBox.getItems().addAll(options);
+        this.levelComboBox.getItems().addAll(optionsLevel);
     }
 
     public void disactiveAll(){
         this.EditData.setDisable(true);
         this.EditData.setVisible(false);
         this.welcomeLabel.setVisible(false);
-        this.quizCreator.setVisible(false);
-        this.quizCreator.setDisable(true);
         this.editPass.setDisable(true);
         this.editPass.setVisible(false);
-        this.welcomeLabel.setVisible(false);
+        this.quizPane.setDisable(true);
+        this.quizPane.setVisible(false);
+        this.taskCreatorPane.setVisible(false);
+        this.taskCreatorPane.setDisable(true);
+
     }
 
     public void logout() throws IOException {
@@ -263,6 +305,68 @@ public class HomeController implements Initializable {
         disactiveAll();
         this.editPass.setVisible(true);
         this.editPass.setDisable(false);
+    }
+
+    public void showNameQuizForm(){
+        disactiveAll();
+        this.quizPane.setVisible(true);
+        this.quizPane.setDisable(false);
+    }
+    public void nameQuizButtonAction(){
+        String nameQuiz = nameQuizField.getText();
+        if(nameQuiz.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Puste pole");
+            alert.setTitle("Puste pole");
+            alert.setContentText("Pola nie mogą być puste");
+            alert.show();
+        }
+        else{
+            String query = "INSERT INTO quiz(quiz_name,creator_id) VALUES('"+nameQuiz+"',"+ID+")";
+            ArrayList<String>queries = new ArrayList<>();
+            queries.add(query);
+            DMLHandler insertQuiz = new DMLHandler(GlobalSettings.socket,queries);
+            insertQuiz.run();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Dodanie quizu");
+            alert.setTitle("Dodanie quizu się powiodło");
+            alert.setContentText("Dodanie quizu ukończone pomyślnie");
+            alert.show();
+            NameQuizButtonAction();
+        }
+    }
+    public void NameQuizButtonAction(){
+        disactiveAll();
+        this.taskCreatorPane.setDisable(false);
+        this.taskCreatorPane.setVisible(true);
+
+
+    }
+
+    public void createTask(){
+        String nameTask = this.nameTaskField.getText();
+        int maxPoints = 5;
+        String typeTask = (String) this.typeComboBox.getValue();
+        String levelTask = (String) this.levelComboBox.getValue();
+        String content = this.taskArea.getText();
+        if(nameTask.isBlank() || typeTask.isBlank() || levelTask.isBlank() || content.isBlank()){
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Puste pole");
+            alert.setTitle("Puste pole");
+            alert.setContentText("Pola nie mogą być puste");
+            alert.show();
+        }
+        else{
+            Task newTask = new Task(ID,"",nameTask,content,maxPoints);
+            newTask.addLevel(Level.MEDIUM);
+            newTask.addType(Type.OPENED);
+            newTask.addTaskToDB();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText("Dodano poprawnie zadanie");
+            alert.setTitle("DOdano poprawnie zadanie");
+            alert.setContentText("Zadanie zostało dodane poprawnie");
+            alert.show();
+        }
     }
 
 

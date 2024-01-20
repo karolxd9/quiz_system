@@ -35,7 +35,7 @@ public class DBSelectServerThread {
             while(true){
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("Połączono z klientem " + clientSocket.getInetAddress());
-                clientSocket.close();
+
             }
         }
         catch (IOException e){
