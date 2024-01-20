@@ -8,7 +8,7 @@ import java.net.Socket;
 
 public class HelloApplication{
     public static void main(String[] args) throws IOException {
-        Client client = new Client();
+        Client.main("SELECT * FROM user");
 
     }
 }

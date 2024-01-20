@@ -1,6 +1,7 @@
 package com.db;
 
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -27,9 +28,10 @@ public class DBServerThread {
     private static class ClientHandler implements Runnable {
         private Socket socket;
         private String query;
-
         public ClientHandler(Socket socket) {
             this.socket = socket;
+            InputStreamReader inReader = new InputStreamReader(socket.getInputStream());
+            this.query = inReader;
         }
         @Override
         public void run() {
@@ -42,7 +44,7 @@ public class DBServerThread {
                 // Przekazanie danych do klienta
                 ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
 
-                Result<String>wynik = new Result<>();
+                Result<Object>wynik = new Result<>(resultSet);
                 wynik.getData("first_name");
 
                 // Zamknij zasoby
