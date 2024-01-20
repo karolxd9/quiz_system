@@ -1,9 +1,7 @@
 package com.db;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.OutputStreamWriter;
+import java.io.*;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -12,19 +10,27 @@ public class Client {
     public Client(String query){
         this.query = query;
     }
+    public String getQuery(){
+        return this.query;
+    }
     public void main() {
         try {
-            Socket socket = new Socket("192.168.0.101", 7001);
-            // Odbierz dane od serwera
+            Socket socket = new Socket("192.168.0.101", 7003);
+
+            //wyśyłanie danych do serwera
+            PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
+            printWriter.write(this.query);
+
+
+            //odbierz dane od serwera
             ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream());
-            OutputStreamWriter outWriter = new OutputStreamWriter(socket.getOutputStream());
-            outWriter.write(this.query);
             try {
                 ArrayList<Object> receivedData = (ArrayList<Object>) inputStream.readObject();
                 System.out.println("Otrzymano dane: " + receivedData.toString());
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
