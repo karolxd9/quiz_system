@@ -1,4 +1,4 @@
-/*
+
 package com.auth;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -31,4 +31,4 @@ public class SHA256Hashing {
         }
     }
 }
-*/
+

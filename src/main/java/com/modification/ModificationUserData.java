@@ -1,4 +1,4 @@
-/*
+
 package com.modification;
 
 import com.auth.Register;
@@ -15,14 +15,14 @@ public class ModificationUserData {
     private DMLHandler modificationHandler; //Obsługa DML
 
 
-    */
+
 /**
      * Zmiana hasła
      * @param userID identyfikator użytkownika
      * @param currentPassword obecne hasło
      * @param newPassword potencjalne nowe hasło(może nie spełniać zasad tworzenia hasła)
      * @throws SQLException
-     *//*
+     */
 
     public void changePassword(int userID,String currentPassword,String newPassword) throws SQLException {
         QueryExecutor queryExecutor = new QueryExecutor();
@@ -39,13 +39,13 @@ public class ModificationUserData {
         }
     }
 
-    */
+
 /**
      * Zmiana loginu
      * @param userID identyfikator użytkownika
      * @param newLogin potencjalny nowy login(może nie spełniać kryteriów ten podany przez użytkownika)
      * @throws SQLException
-     *//*
+     */
 
     public void changeLogin(int userID,String newLogin) throws SQLException {
         if(Register.includeLoginConditions(newLogin)){
@@ -57,13 +57,13 @@ public class ModificationUserData {
         }
     }
 
-    */
+
 /**
      * Zmiana pierwszego imienia
      * @param userID identyfikator użytkownika
      * @param name potencjalne pierwsze imię(przechodzi weryfikację)
      * @throws SQLException
-     *//*
+     */
 
     public void changeFirstName(int userID,String name) throws SQLException{
         if(Register.includeNameConditions(name)) {
@@ -75,13 +75,13 @@ public class ModificationUserData {
         }
     }
 
-    */
+
 /**
      * Zmiana drugiego imienia
      * @param userID identyfikator użytkownika
      * @param name potencjalne drugie imię
      * @throws SQLException
-     *//*
+     */
 
     public void changeSecondName(int userID,String name) throws SQLException{
 
@@ -93,13 +93,13 @@ public class ModificationUserData {
 
     }
 
-    */
+
 /**
      * Zmiana nazwiska
      * @param userID identyfikator użytkownika
      * @param lastName potencjalne nazwisko(przechodzi weryfikację)
      * @throws SQLException
-     *//*
+     */
 
     public void changeSurname(int userID,String lastName) throws SQLException{
         if(Register.includeNameConditions(lastName)) {
@@ -112,4 +112,4 @@ public class ModificationUserData {
     }
 
 }
-*/
+

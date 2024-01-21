@@ -1,4 +1,4 @@
-/*
+
 package com.quiz;
 
 import com.conf.GlobalSettings;
@@ -32,4 +32,4 @@ public class Certification {
     }
 
 }
-*/
+

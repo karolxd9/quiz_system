@@ -1,4 +1,4 @@
-/*
+
 package com.conf;
 
 import java.net.ConnectException;
@@ -7,21 +7,21 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-*/
+
 /**
  * Klasa umożliwiająca łączenie z bazą danych
- *//*
+ */
 
 public class DBConnector {
     private static String URL = "jdbc:mysql://h28.seohost.pl/srv63119_platforma_testowa";
     private static String USER = "srv63119_platforma_testowa";
     private static String PASS = "root";
 
-    */
+
 /**
      * Łączenie z bazą danych
      * @return zwraca ustanowione połączenie
-     *//*
+     */
 
     public static Connection connect(){
         // Zarejestruj sterownik JDBC
@@ -45,11 +45,11 @@ public class DBConnector {
         return connection;
     }
 
-    */
+
 /**
      * Zamyka połączenie z bazą danych
      * @param connection połączenie z bazą danych
-     *//*
+     */
 
     public static void disconnect(Connection connection){
         try{
@@ -63,4 +63,4 @@ public class DBConnector {
     }
 
 }
-*/
+

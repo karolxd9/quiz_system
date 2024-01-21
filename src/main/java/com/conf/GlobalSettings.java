@@ -1,4 +1,4 @@
-/*
+
 package com.conf;
 
 import java.io.IOException;
@@ -28,4 +28,4 @@ public class GlobalSettings {
     }
 
 }
-*/
+
