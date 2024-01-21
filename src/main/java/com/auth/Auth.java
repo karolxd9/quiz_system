@@ -1,4 +1,4 @@
-/*
+
 package com.auth;
 
 import com.conf.GlobalSettings;
@@ -28,4 +28,4 @@ public class Auth {
 
 
 }
-*/
+

@@ -1,4 +1,4 @@
-/*
+
 package com.goncalves.project.controller;
 
 import com.auth.Register;
@@ -100,7 +100,11 @@ public class HomeController implements Initializable {
         loginStatus = SharedData.getInstance().isLoginStatus();
         String dataFromUser = "SELECT * FROM user_login NATURAL JOIN user WHERE user_id = "+ ID;
         System.out.println(dataFromUser);
-        r1 = QueryExecutor.result(dataFromUser, GlobalSettings.socket);
+        try {
+            r1 = QueryExecutor.result(dataFromUser, GlobalSettings.socket);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         try {
             r1.next();
         } catch (SQLException e) {
@@ -372,4 +376,4 @@ public class HomeController implements Initializable {
 
 
 }
-*/
+

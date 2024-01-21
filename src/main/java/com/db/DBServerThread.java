@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DBServerThread {
     private static String query = "";
@@ -29,7 +30,7 @@ public class DBServerThread {
         }
     }
 
-    private class ClientHandler implements Runnable {
+    private static class ClientHandler implements Runnable {
         private Socket socket;
 
         public ClientHandler(Socket socket) throws IOException {
@@ -49,10 +50,19 @@ public class DBServerThread {
                 // Przekazanie danych do klienta
                 ObjectOutputStream outputStream = new ObjectOutputStream(socket.getOutputStream());
 
-                Result<Object>wynik = new Result<>(resultSet);
-                wynik.getData("first_name");
+                // Przetwarzanie wyników zapytania na listę obiektów
+                ArrayList<Object> resultData = new ArrayList<>();
+                while (resultSet.next()){
+                    // Przykładowe dodawanie do listy (zależy to od struktury tabeli)
+                    resultData.add(resultSet.getString("first_name"));
+                }
 
+                outputStream.writeObject(resultData);
 
+                outputStream.close();
+                resultSet.close();
+                statement.close();
+                connection.close();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (SQLException e) {

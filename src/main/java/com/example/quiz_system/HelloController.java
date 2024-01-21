@@ -1,4 +1,4 @@
-/*
+
 package com.example.quiz_system;
 
 import javafx.fxml.FXML;
@@ -12,4 +12,4 @@ public class HelloController {
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
-}*/
+}

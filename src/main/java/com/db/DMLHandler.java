@@ -1,4 +1,3 @@
-/*
 package com.db;
 
 import com.conf.QueryExecutor;
@@ -58,4 +57,3 @@ public class DMLHandler implements Runnable {
         }
     }
 }
-*/

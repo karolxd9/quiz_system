@@ -1,4 +1,4 @@
-/*
+
 package com.goncalves.project.controller;
 
 import javafx.stage.Stage;
@@ -46,4 +46,4 @@ public class SharedData {
     }
 }
 
-*/
+

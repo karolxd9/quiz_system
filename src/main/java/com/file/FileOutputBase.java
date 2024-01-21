@@ -1,4 +1,4 @@
-/*
+
 package com.file;
 
 import com.conf.GlobalSettings;
@@ -9,10 +9,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-*/
+
 /**
  * Klasa ogólna za pomocą, która pomoże w generacji i tworzeniu pliku o danym rozszerzeniu
- *//*
+ */
 
 public class FileOutputBase implements Runnable{
 
@@ -31,4 +31,4 @@ public class FileOutputBase implements Runnable{
         
     }
 }
-*/
+
